@@ -321,14 +321,20 @@ tasks.register<Copy>("mergeScripts") {
 // Build Hide.zig for arm64
 tasks.register<Exec>("buildHideArm64") {
     // Zig executable path - can be overridden via environment variable or local.properties
-    val zigDir = localProperties.getProperty("zig.dir")
-        ?: System.getenv("ZIG_DIR")
-        ?: "E:\\bin\\zig"
-    val zigExe = if (System.getProperty("os.name").lowercase().contains("win")) {
-        File(zigDir, "zig.exe")
-    } else {
-        File(zigDir, "zig")
-    }
+    // Try PATH first (for CI), then local.properties, then default locations
+    val zigExe = System.getenv("ZIG_EXE")?.let { File(it) }
+        ?: localProperties.getProperty("zig.dir")?.let { zigDir ->
+            if (System.getProperty("os.name").lowercase().contains("win")) {
+                File(zigDir, "zig.exe")
+            } else {
+                File(zigDir, "zig")
+            }
+        }
+        ?: if (System.getProperty("os.name").lowercase().contains("win")) {
+            File("E:\\bin\\zig", "zig.exe")
+        } else {
+            File("zig") // Assume zig is in PATH on Linux/Mac
+        }
 
     val sourceFile = rootProject.file("FolkS/Hide.zig")
     val outputFile = file("src/main/assets/Service/Hide")
@@ -360,14 +366,20 @@ tasks.register<Exec>("buildHideArm64") {
 
 // Build Umount.zig for arm64
 tasks.register<Exec>("buildUmountArm64") {
-    val zigDir = localProperties.getProperty("zig.dir")
-        ?: System.getenv("ZIG_DIR")
-        ?: "E:\\bin\\zig"
-    val zigExe = if (System.getProperty("os.name").lowercase().contains("win")) {
-        File(zigDir, "zig.exe")
-    } else {
-        File(zigDir, "zig")
-    }
+    // Try PATH first (for CI), then local.properties, then default locations
+    val zigExe = System.getenv("ZIG_EXE")?.let { File(it) }
+        ?: localProperties.getProperty("zig.dir")?.let { zigDir ->
+            if (System.getProperty("os.name").lowercase().contains("win")) {
+                File(zigDir, "zig.exe")
+            } else {
+                File(zigDir, "zig")
+            }
+        }
+        ?: if (System.getProperty("os.name").lowercase().contains("win")) {
+            File("E:\\bin\\zig", "zig.exe")
+        } else {
+            File("zig") // Assume zig is in PATH on Linux/Mac
+        }
 
     val sourceFile = rootProject.file("FolkS/Umount.zig")
     val outputFile = file("src/main/assets/Service/Umount")
