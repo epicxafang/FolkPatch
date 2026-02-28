@@ -388,7 +388,7 @@ Here are some possible reasons for authentication failure—please check which o
     <string name="yellow_theme">Yellow</string>
     <string name="ink_wash_theme">Ink Wash</string>
 
-    <string name="about_app_desc">A kernel-based root solution that supports kernel modules and kernel function hooks without recompiling the kernel.</string>
+    <string name="about_app_desc">A Root implementation based on KernelPatch, allowing kernel function hooks without recompiling the kernel.</string>
     <string name="about_powered_by">Powered by %1$s</string>
     <string name="about_telegram_group">Telegram Group</string>
     <string name="github">GitHub</string>

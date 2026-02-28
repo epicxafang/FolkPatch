@@ -1,6 +1,6 @@
 The patching of Android kernel and Android system.
 <ul>
-<li>A new kernel-based root solution for Android devices.</li>
+<li>A Root implementation based on KernelPatch for Android devices.</li>
 <li>APM: Support for modules similar to Magisk.</li>
 <li>KPM: Support for modules that allow you to inject any code into the kernel (Requires kernel function <code>inline-hook</code> and <code>syscall-table-hook</code> enabled).</li>
 <li>APatch relies on KernelPatch.</li>

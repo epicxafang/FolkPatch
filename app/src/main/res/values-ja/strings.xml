@@ -335,7 +335,7 @@
     <string name="apm_api_verifying">検証中…</string>
     <string name="apm_api_retry">再試行</string>
     <string name="apm_api_empty">利用可能な API ソースがありません</string>
-    <string name="about_app_desc">カーネルをリコンパイルせずにカーネルモジュールとカーネル関数フックをサポートするカーネルベースのルートソリューションです。</string>
+    <string name="about_app_desc">KernelPatch ベースの Root 実装で、カーネルを再コンパイルせずにカーネル関数のフックを可能にします。</string>
     <string name="about_powered_by">Powered by %1$s</string>
     <string name="about_telegram_group">Telegram グループ</string>
     <!-- Online Module Strings -->

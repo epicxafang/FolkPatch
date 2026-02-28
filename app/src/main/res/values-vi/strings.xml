@@ -388,7 +388,7 @@ Dưới đây là một số nguyên nhân có thể gây ra thất bại xác t
     <string name="teal_theme">Màu xanh ngọc</string>
     <string name="yellow_theme">Màu vàng</string>
 
-    <string name="about_app_desc">Một giải pháp Root dựa trên nhân, hỗ trợ module nhân và hook hàm nhân, không cần biên dịch lại nhân.</string>
+    <string name="about_app_desc">Cài đặt Root dựa trên KernelPatch, cho phép hook hàm nhân mà không cần biên dịch lại nhân.</string>
     <string name="about_powered_by">Được hỗ trợ bởi %1$s</string>
     <string name="about_telegram_group">Nhóm Telegram</string>
     

@@ -387,7 +387,7 @@
     <string name="teal_theme">藍綠色主題</string>
     <string name="yellow_theme">黃色主題</string>
 
-    <string name="about_app_desc">一個基於核心的 Root 解決方案，支援核心模組與核心函式 hook，無需重新編譯核心。</string>
+    <string name="about_app_desc">基於 KernelPatch 的 Root 實現，無需重新編譯內核的同時，允許 Hook 內核函數。</string>
     <string name="about_powered_by">由 %1$s 提供支援</string>
     <string name="about_telegram_group">Telegram 群組</string>
 

@@ -392,7 +392,7 @@ Aqui estão algumas possíveis razões para a falha de autenticação—verifiqu
     <string name="teal_theme">Verde-azulado (Teal)</string>
     <string name="yellow_theme">Amarelo</string>
 
-    <string name="about_app_desc">Uma solução root baseada em kernel que suporta módulos de kernel e hooks de função sem recompilar o kernel.</string>
+    <string name="about_app_desc">Uma implementação Root baseada em KernelPatch, permitindo hooks de função do kernel sem recompilar o kernel.</string>
     <string name="about_powered_by">Desenvolvido por %1$s</string>
     <string name="about_telegram_group">Grupo no Telegram</string>
     

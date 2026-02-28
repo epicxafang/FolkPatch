@@ -392,7 +392,7 @@ Oto kilka możliwych przyczyn niepowodzenia uwierzytelnienia—proszę sprawdzi�
     <string name="teal_theme">Błękitny</string>
     <string name="yellow_theme">Żółty</string>
 
-    <string name="about_app_desc">Rozwiązanie root oparte na jądrze, które obsługuje moduły jądra i haki funkcji jądra bez ponownej kompilacji jądra.</string>
+    <string name="about_app_desc">Implementacja Root oparta na KernelPatch, pozwalająca na hookowanie funkcji jądra bez ponownej kompilacji jądra.</string>
     <string name="about_powered_by">Napędzane przez %1$s</string>
     <string name="about_telegram_group">Grupa Telegram</string>
     

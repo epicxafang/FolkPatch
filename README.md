@@ -33,7 +33,7 @@ FolkPatch - 专注界面优化与功能扩展的Root管理工具
 ## ✨ 介绍
 
 ### 🎨 核心功能
-- [x] Android 内核级 Root 实现方案
+- [x] 基于 KernelPatch 的 Root 实现
 - [x] 无需重新编译内核即可 Hook 内核函数
 
 ### 📱 前置要求

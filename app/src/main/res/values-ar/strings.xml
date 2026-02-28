@@ -395,7 +395,7 @@
     <string name="teal_theme">أزرق مخضر</string>
     <string name="yellow_theme">أصفر</string>
 
-    <string name="about_app_desc">حل روت قائم على النواة يدعم وحدات النواة وخطافات وظائف النواة دون إعادة تجميع النواة.</string>
+    <string name="about_app_desc">تطبيق Root مبني على KernelPatch، يسمح بخطاف وظائف النواة دون إعادة تجميع النواة.</string>
     <string name="about_powered_by">مدعوم من %1$s</string>
     <string name="about_telegram_group">مجموعة تيليجرام</string>
     

@@ -383,7 +383,7 @@
     <string name="teal_theme">蓝绿色</string>
     <string name="yellow_theme">黄色</string>
 
-    <string name="about_app_desc">一个基于核心食材的 Root 解决方案，支持核心酱料和核心函数 hook，无需重新烹饪核心食材。</string>
+    <string name="about_app_desc">基于 KernelPatch 的 Root 实现，无需重新烹饪内核的同时，允许 Hook 内核函数。</string>
     <string name="about_powered_by">由 %1$s 提供支持</string>
     <string name="about_telegram_group">Telegram 群组</string>
 

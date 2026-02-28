@@ -391,7 +391,7 @@ Berikut adalah beberapa kemungkinan penyebab kegagalan autentikasi—silakan cek
     <string name="teal_theme">Hijau Kebiru-biruan</string>
     <string name="yellow_theme">Kuning</string>
 
-    <string name="about_app_desc">Solusi *root* tingkat kernel yang mendukung modul kernel dan *hook* fungsi kernel tanpa kompilasi ulang kernel.</string>
+    <string name="about_app_desc">Implementasi Root berbasis KernelPatch, memungkinkan *hook* fungsi kernel tanpa kompilasi ulang kernel.</string>
     <string name="about_powered_by">Didukung oleh %1$s</string>
     <string name="about_telegram_group">Grup Telegram</string>
 

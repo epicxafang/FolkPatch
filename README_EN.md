@@ -33,7 +33,7 @@ Get started quickly with our comprehensive documentation. Whether it's installat
 ## ✨ Introduction
 
 ### 🎨 Core Features
-- [x] Android kernel-level Root implementation
+- [x] Root implementation based on KernelPatch
 - [x] Hook kernel functions without recompiling the kernel
 
 ### 📱 Prerequisites
