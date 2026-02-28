@@ -801,6 +801,7 @@
     <string name="my_themes_delete_confirm">このテーマを削除してもよろしいですか？</string>
     <string name="my_themes_deleted">テーマを削除しました</string>
     <string name="my_themes_applied">テーマを適用しました</string>
+    <string name="my_themes_apply_failed">テーマの適用に失敗しました</string>
     <string name="my_themes_details">テーマの詳細</string>
 
     <!-- ダウンロードダイアログ -->

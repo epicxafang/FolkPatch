@@ -106,7 +106,7 @@ fun MyThemesScreen(
                             if (success) {
                                 snackbarHostState.showSnackbar(context.getString(R.string.my_themes_applied))
                             } else {
-                                snackbarHostState.showSnackbar("Failed to apply theme")
+                                snackbarHostState.showSnackbar(context.getString(R.string.my_themes_apply_failed))
                             }
                         }
                         selectedTheme = null

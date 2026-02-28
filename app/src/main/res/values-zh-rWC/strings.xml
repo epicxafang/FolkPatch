@@ -880,6 +880,7 @@
     <string name="my_themes_delete_confirm">确定要舍弃此主题仙卷吗？</string>
     <string name="my_themes_deleted">主题已舍弃</string>
     <string name="my_themes_applied">主题已施展</string>
+    <string name="my_themes_apply_failed">施展主题失败</string>
     <string name="my_themes_details">主题仙卷详情</string>
 
     <!-- 下载对话 -->

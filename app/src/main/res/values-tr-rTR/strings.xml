@@ -891,6 +891,7 @@ Komutların çalışması için uygulamanın tamamen kapatılıp yeniden açıld
     <string name="my_themes_delete_confirm">Bu temayı silmek istediğinizden emin misiniz?</string>
     <string name="my_themes_deleted">Tema silindi</string>
     <string name="my_themes_applied">Tema uygulandı</string>
+    <string name="my_themes_apply_failed">Tema uygulanamadı</string>
     <string name="my_themes_details">Tema Detayları</string>
 
     <!-- İndirme Diyaloğu -->

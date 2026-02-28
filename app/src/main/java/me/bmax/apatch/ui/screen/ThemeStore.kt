@@ -123,12 +123,12 @@ fun ThemeStoreScreen(
                     kotlinx.coroutines.delay(100)
                     val localTheme = viewModel.localThemes.find { it.id == completedTheme.id }
                     if (localTheme != null) {
-                        val success = viewModel.applyTheme(localTheme)
-                        if (success) {
-                            snackbarHostState.showSnackbar(context.getString(R.string.my_themes_applied))
-                        } else {
-                            snackbarHostState.showSnackbar("Failed to apply theme")
-                        }
+                                    val success = viewModel.applyTheme(localTheme)
+                                    if (success) {
+                                        snackbarHostState.showSnackbar(context.getString(R.string.my_themes_applied))
+                                    } else {
+                                        snackbarHostState.showSnackbar(context.getString(R.string.my_themes_apply_failed))
+                                    }
                     } else {
                         snackbarHostState.showSnackbar("Theme not found in local list")
                     }

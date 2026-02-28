@@ -753,6 +753,7 @@ Please ensure the app is completely closed and reopened for the commands to exec
     <string name="my_themes_delete_confirm">Are you sure you want to delete this theme?</string>
     <string name="my_themes_deleted">Theme deleted</string>
     <string name="my_themes_applied">Theme applied</string>
+    <string name="my_themes_apply_failed">Failed to apply theme</string>
     <string name="my_themes_details">Theme Details</string>
 
     <!-- Download Dialog -->

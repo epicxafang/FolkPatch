@@ -878,6 +878,7 @@ Pastikan aplikasi ditutup sepenuhnya dan dimulai ulang untuk menjalankan perinta
     <string name="my_themes_delete_confirm">Apakah Anda yakin ingin menghapus tema ini?</string>
     <string name="my_themes_deleted">Tema dihapus</string>
     <string name="my_themes_applied">Tema diterapkan</string>
+    <string name="my_themes_apply_failed">Gagal menerapkan tema</string>
     <string name="my_themes_details">Detail Tema</string>
 
     <!-- Dialog Unduh -->

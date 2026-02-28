@@ -884,6 +884,7 @@
     <string name="my_themes_delete_confirm">هل أنت متأكد من حذف هذه السمة؟</string>
     <string name="my_themes_deleted">تم حذف السمة</string>
     <string name="my_themes_applied">تم تطبيق السمة</string>
+    <string name="my_themes_apply_failed">فشل تطبيق السمة</string>
     <string name="my_themes_details">تفاصيل السمة</string>
 
     <!-- حوار التنزيل -->

@@ -883,6 +883,7 @@
     <string name="my_themes_delete_confirm">确定要净化此主题圣物吗？</string>
     <string name="my_themes_deleted">主题已净化</string>
     <string name="my_themes_applied">主题已施展</string>
+    <string name="my_themes_apply_failed">施展主题失败</string>
     <string name="my_themes_details">主题圣物详情</string>
 
     <!-- 下载圣光阵 -->

@@ -898,6 +898,7 @@ Upewnij się, że aplikacja jest całkowicie zamknięta i ponownie otwarta, aby 
     <string name="my_themes_delete_confirm">Czy na pewno chcesz usunąć ten motyw?</string>
     <string name="my_themes_deleted">Usunięto motyw</string>
     <string name="my_themes_applied">Zastosowano motyw</string>
+    <string name="my_themes_apply_failed">Nie udało się zastosować motywu</string>
     <string name="my_themes_details">Szczegóły motywu</string>
 
     <!-- Dialog Pobierania -->

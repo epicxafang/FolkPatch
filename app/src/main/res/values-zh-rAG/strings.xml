@@ -882,6 +882,7 @@
     <string name="my_themes_delete_confirm">真的要删掉这个主题喵？</string>
     <string name="my_themes_deleted">主题删掉了喵</string>
     <string name="my_themes_applied">主题应用了喵</string>
+    <string name="my_themes_apply_failed">应用主题失败了喵</string>
     <string name="my_themes_details">主题详情喵</string>
 
     <!-- 下载对话喵 -->

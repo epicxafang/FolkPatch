@@ -885,6 +885,7 @@
     <string name="my_themes_delete_confirm">確定要刪除此主題嗎？</string>
     <string name="my_themes_deleted">主題已刪除</string>
     <string name="my_themes_applied">主題已應用</string>
+    <string name="my_themes_apply_failed">應用主題失敗</string>
     <string name="my_themes_details">主題詳情</string>
 
     <!-- 下載對話框 -->

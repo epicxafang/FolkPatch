@@ -880,6 +880,7 @@
     <string name="my_themes_delete_confirm">确定要删除这个主题吗？</string>
     <string name="my_themes_deleted">主题已删除</string>
     <string name="my_themes_applied">主题已应用</string>
+    <string name="my_themes_apply_failed">应用主题失败</string>
     <string name="my_themes_details">主题详情</string>
 
     <!-- 下载对话 -->
