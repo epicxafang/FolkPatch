@@ -14,11 +14,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Download
-import androidx.compose.material.icons.filled.FilterList
-import androidx.compose.material.icons.filled.Folder
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.window.DialogProperties
 import androidx.compose.material3.*
@@ -313,7 +309,7 @@ fun ThemeStoreScreen(
                 actions = {
                     // "我的主题"按钮
                     IconButton(onClick = { navigator.navigate(MyThemesScreenDestination) }) {
-                        Icon(Icons.Filled.Folder, contentDescription = "My Themes")
+                        Icon(Icons.Filled.ColorLens, contentDescription = "My Themes")
                     }
                     if (isSearchActive) {
                         if (viewModel.searchQuery.isNotEmpty()) {

@@ -13,6 +13,8 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.window.DialogProperties
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -53,6 +55,7 @@ fun MyThemesScreen(
     var selectedTheme by remember { mutableStateOf<ThemeStoreViewModel.LocalTheme?>(null) }
     var showDeleteDialog by remember { mutableStateOf<ThemeStoreViewModel.LocalTheme?>(null) }
     var refreshing by remember { mutableStateOf(false) }
+    var isSearchActive by remember { mutableStateOf(false) }
 
     // 刷新本地主题列表
     LaunchedEffect(Unit) {
@@ -89,27 +92,6 @@ fun MyThemesScreen(
                         text = "${stringResource(R.string.theme_source)}: $sourceString",
                         style = MaterialTheme.typography.bodyMedium
                     )
-                    if (isActive) {
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.Center,
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Icon(
-                                imageVector = Icons.Filled.CheckCircle,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.size(20.dp)
-                            )
-                            Spacer(modifier = Modifier.width(4.dp))
-                            Text(
-                                text = "Currently Active",
-                                color = MaterialTheme.colorScheme.primary,
-                                style = MaterialTheme.typography.bodySmall
-                            )
-                        }
-                    }
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = theme.description.ifEmpty { "No description" },
@@ -198,19 +180,56 @@ fun MyThemesScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.my_themes_title)) },
+                title = {
+                    if (isSearchActive) {
+                        TextField(
+                            value = viewModel.localSearchQuery,
+                            onValueChange = { viewModel.onLocalSearchQueryChange(it) },
+                            placeholder = { Text(stringResource(R.string.theme_store_search_hint)) },
+                            singleLine = true,
+                            colors = TextFieldDefaults.colors(
+                                focusedContainerColor = Color.Transparent,
+                                unfocusedContainerColor = Color.Transparent,
+                                disabledContainerColor = Color.Transparent,
+                                focusedIndicatorColor = Color.Transparent,
+                                unfocusedIndicatorColor = Color.Transparent,
+                            ),
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    } else {
+                        Text(stringResource(R.string.my_themes_title))
+                    }
+                },
                 navigationIcon = {
-                    IconButton(onClick = { navigator.popBackStack() }) {
+                    IconButton(onClick = {
+                        if (isSearchActive) {
+                            isSearchActive = false
+                            viewModel.onLocalSearchQueryChange("")
+                        } else {
+                            navigator.popBackStack()
+                        }
+                    }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
                 },
                 actions = {
-                    IconButton(onClick = {
-                        refreshing = true
-                        viewModel.loadLocalThemes()
-                        refreshing = false
-                    }) {
-                        Icon(Icons.Filled.Refresh, contentDescription = "Refresh")
+                    if (isSearchActive) {
+                        if (viewModel.localSearchQuery.isNotEmpty()) {
+                            IconButton(onClick = { viewModel.onLocalSearchQueryChange("") }) {
+                                Icon(Icons.Filled.Close, contentDescription = "Clear")
+                            }
+                        }
+                    } else {
+                        IconButton(onClick = { isSearchActive = true }) {
+                            Icon(Icons.Filled.Search, contentDescription = "Search")
+                        }
+                        IconButton(onClick = {
+                            refreshing = true
+                            viewModel.loadLocalThemes()
+                            refreshing = false
+                        }) {
+                            Icon(Icons.Filled.Refresh, contentDescription = "Refresh")
+                        }
                     }
                 }
             )
