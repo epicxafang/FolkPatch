@@ -30,7 +30,6 @@ class ThemeStoreViewModel(private val context: Context) : ViewModel() {
         // SharedPreferences 文件名
         private const val PREFS_NAME = "theme_store_prefs"
         private const val KEY_DOWNLOADED_THEMES = "downloaded_themes"
-        private const val KEY_ACTIVE_THEME_PATH = "active_theme_path"
     }
 
     data class RemoteTheme(
@@ -93,10 +92,6 @@ class ThemeStoreViewModel(private val context: Context) : ViewModel() {
     
     // 过滤后的本地主题列表
     private var filteredLocalThemes = mutableListOf<LocalTheme>()
-    
-    // 当前激活的主题 ID
-    var activeThemeId by mutableStateOf<String?>(null)
-        private set
     
     // 下载任务
     private val downloadJobs = mutableMapOf<String, Job>()
@@ -267,9 +262,6 @@ class ThemeStoreViewModel(private val context: Context) : ViewModel() {
      */
     fun loadLocalThemes() {
         viewModelScope.launch(Dispatchers.IO) {
-            val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-            val activeThemePath = prefs.getString(KEY_ACTIVE_THEME_PATH, null)
-            
             val themesDir = themeDownloader.getThemesDir()
             val themes = mutableListOf<LocalTheme>()
             
@@ -350,9 +342,7 @@ class ThemeStoreViewModel(private val context: Context) : ViewModel() {
                 }
             }
             
-            val activeTheme = themes.find { it.localPath == activeThemePath }
-            activeThemeId = activeTheme?.id
-            localThemes = themes.sortedByDescending { it.localPath == activeThemePath }
+            localThemes = themes
             filteredLocalThemes = localThemes.toMutableList()
             applyLocalFilter()
             saveDownloadedThemes(themes)
@@ -440,7 +430,7 @@ class ThemeStoreViewModel(private val context: Context) : ViewModel() {
                 theme.description.contains(localSearchQuery, ignoreCase = true)
             }
         }
-        localThemes = filtered.sortedByDescending { it.id == activeThemeId }
+        localThemes = filtered
     }
 
     /**
@@ -458,11 +448,6 @@ class ThemeStoreViewModel(private val context: Context) : ViewModel() {
             val success = ThemeManager.importTheme(context, uri)
             
             if (success) {
-                activeThemeId = localTheme.id
-                val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-                prefs.edit().putString(KEY_ACTIVE_THEME_PATH, localTheme.localPath).apply()
-                localThemes = localThemes.sortedByDescending { it.id == activeThemeId }
-                filteredLocalThemes = localThemes.toMutableList()
                 Log.i(TAG, "Theme applied: ${localTheme.name}")
             } else {
                 Log.e(TAG, "Failed to apply theme: ${localTheme.name}")
@@ -501,13 +486,6 @@ class ThemeStoreViewModel(private val context: Context) : ViewModel() {
             // 从列表中移除
             localThemes = localThemes.filter { it.id != localTheme.id }
             saveDownloadedThemes(localThemes)
-            
-            // 如果删除的是当前主题，清除激活状态
-            if (activeThemeId == localTheme.id) {
-                activeThemeId = null
-                val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-                prefs.edit().remove(KEY_ACTIVE_THEME_PATH).apply()
-            }
             
             Log.i(TAG, "Theme deleted: ${localTheme.name}")
             true

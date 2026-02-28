@@ -12,7 +12,6 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.ui.graphics.Color
@@ -69,7 +68,6 @@ fun MyThemesScreen(
         val theme = selectedTheme!!
         val typeString = if (theme.type == "tablet") stringResource(R.string.theme_type_tablet) else stringResource(R.string.theme_type_phone)
         val sourceString = if (theme.source == "official") stringResource(R.string.theme_source_official) else stringResource(R.string.theme_source_third_party)
-        val isActive = viewModel.activeThemeId == theme.id
 
         AlertDialog(
             onDismissRequest = { selectedTheme = null },
@@ -101,31 +99,20 @@ fun MyThemesScreen(
                 }
             },
             confirmButton = {
-                if (!isActive) {
-                    Button(
-                        onClick = {
-                            scope.launch {
-                                val success = viewModel.applyTheme(theme)
-                                if (success) {
-                                    snackbarHostState.showSnackbar(context.getString(R.string.my_themes_applied))
-                                } else {
-                                    snackbarHostState.showSnackbar("Failed to apply theme")
-                                }
+                Button(
+                    onClick = {
+                        scope.launch {
+                            val success = viewModel.applyTheme(theme)
+                            if (success) {
+                                snackbarHostState.showSnackbar(context.getString(R.string.my_themes_applied))
+                            } else {
+                                snackbarHostState.showSnackbar("Failed to apply theme")
                             }
-                            selectedTheme = null
                         }
-                    ) {
-                        Text(stringResource(R.string.my_themes_apply))
+                        selectedTheme = null
                     }
-                } else {
-                    OutlinedButton(
-                        onClick = { selectedTheme = null },
-                        enabled = false
-                    ) {
-                        Icon(Icons.Filled.CheckCircle, contentDescription = null, modifier = Modifier.size(16.dp))
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text("Active")
-                    }
+                ) {
+                    Text(stringResource(R.string.my_themes_apply))
                 }
             },
             dismissButton = {
@@ -270,7 +257,6 @@ fun MyThemesScreen(
                 ) { theme ->
                     MyThemeGridItem(
                         theme = theme,
-                        isActive = viewModel.activeThemeId == theme.id,
                         onClick = { selectedTheme = theme },
                         onLongClick = { showDeleteDialog = theme }
                     )
@@ -283,7 +269,6 @@ fun MyThemesScreen(
 @Composable
 fun MyThemeGridItem(
     theme: ThemeStoreViewModel.LocalTheme,
-    isActive: Boolean,
     onClick: () -> Unit,
     onLongClick: () -> Unit
 ) {
@@ -323,23 +308,6 @@ fun MyThemeGridItem(
                     .wrapContentHeight(),
                 contentScale = ContentScale.FillWidth
             )
-            
-            // 激活状态指示器
-            if (isActive) {
-                Box(
-                    modifier = Modifier
-                        .align(Alignment.TopEnd)
-                        .padding(8.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        imageVector = Icons.Filled.CheckCircle,
-                        contentDescription = "Active",
-                        tint = Color.White,
-                        modifier = Modifier.size(32.dp)
-                    )
-                }
-            }
             
             // 底部信息（渐变背景）
             Box(
