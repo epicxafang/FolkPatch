@@ -889,4 +889,23 @@ Por ejemplo, los KPM que previenen la modificación de particiones solo pueden u
     <string name="umount_config_save_confirm">¿Confirmar guardar configuración?</string>
     <string name="umount_config_save_success">Configuración guardada exitosamente</string>
     <string name="umount_config_save_failed">Error al guardar configuración</string>
+
+    <!-- Diálogo de Descarga -->
+    <string name="theme_download_title">Descargando Tema</string>
+    <string name="theme_download_completed">Descarga completada</string>
+    <string name="theme_download_failed">Descarga fallida</string>
+    <string name="theme_download_progress">Progreso</string>
+    <string name="theme_download_file">Archivo de Tema</string>
+    <string name="theme_download_image">Imagen de Vista Previa</string>
+    <string name="theme_download_cancel">Cancelar</string>
+    <string name="theme_download_pause">Pausar</string>
+    <string name="theme_download_resume">Reanudar</string>
+    <string name="theme_download_retry">Reintentar</string>
+    <string name="theme_download_apply">Aplicar Tema</string>
+    <string name="theme_download_go_to_my_themes">Mis Temas</string>
+    <string name="theme_download_retrying">Reintentando (%d/3)...</string>
+    <string name="theme_download_preparing">Preparando descarga...</string>
+    <string name="theme_download_downloading_file">Descargando archivo de tema...</string>
+    <string name="theme_download_downloading_image">Descargando imagen de vista previa...</string>
+    <string name="theme_download_finalizing">Finalizando...</string>
 </resources>

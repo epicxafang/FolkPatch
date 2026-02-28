@@ -868,4 +868,23 @@ Pastikan aplikasi ditutup sepenuhnya dan dimulai ulang untuk menjalankan perinta
     <string name="umount_config_save_confirm">Konfirmasi simpan konfigurasi?</string>
     <string name="umount_config_save_success">Konfigurasi berhasil disimpan</string>
     <string name="umount_config_save_failed">Gagal menyimpan konfigurasi</string>
+
+    <!-- Dialog Unduh -->
+    <string name="theme_download_title">Mengunduh Tema</string>
+    <string name="theme_download_completed">Unduhan selesai</string>
+    <string name="theme_download_failed">Unduhan gagal</string>
+    <string name="theme_download_progress">Progres</string>
+    <string name="theme_download_file">File Tema</string>
+    <string name="theme_download_image">Gambar Pratinjau</string>
+    <string name="theme_download_cancel">Batal</string>
+    <string name="theme_download_pause">Jeda</string>
+    <string name="theme_download_resume">Lanjutkan</string>
+    <string name="theme_download_retry">Coba Lagi</string>
+    <string name="theme_download_apply">Terapkan Tema</string>
+    <string name="theme_download_go_to_my_themes">Tema Saya</string>
+    <string name="theme_download_retrying">Mencoba Lagi (%d/3)...</string>
+    <string name="theme_download_preparing">Menyiapkan unduhan...</string>
+    <string name="theme_download_downloading_file">Mengunduh file tema...</string>
+    <string name="theme_download_downloading_image">Mengunduh gambar pratinjau...</string>
+    <string name="theme_download_finalizing">Menyelesaikan...</string>
 </resources>

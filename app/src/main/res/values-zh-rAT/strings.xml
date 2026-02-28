@@ -873,4 +873,23 @@
     <string name="umount_config_save_confirm">确认以圣言保存配置？</string>
     <string name="umount_config_save_success">圣言已传达，配置保存成功</string>
     <string name="umount_config_save_failed">圣言传达失败，配置保存失败</string>
+
+    <!-- 下载圣光阵 -->
+    <string name="theme_download_title">正在祈召主题</string>
+    <string name="theme_download_completed">祈召完成</string>
+    <string name="theme_download_failed">祈召失败</string>
+    <string name="theme_download_progress">圣光进度</string>
+    <string name="theme_download_file">主题圣物</string>
+    <string name="theme_download_image">圣光预览</string>
+    <string name="theme_download_cancel">终止祈召</string>
+    <string name="theme_download_pause">暂停祈召</string>
+    <string name="theme_download_resume">继续祈召</string>
+    <string name="theme_download_retry">重新祈召</string>
+    <string name="theme_download_apply">施展主题</string>
+    <string name="theme_download_go_to_my_themes">我的圣域</string>
+    <string name="theme_download_retrying">重新祈召中 (%d/3)...</string>
+    <string name="theme_download_preparing">准备祈召...</string>
+    <string name="theme_download_downloading_file">正在下载主题圣物...</string>
+    <string name="theme_download_downloading_image">正在下载圣光预览...</string>
+    <string name="theme_download_finalizing">圣光凝聚中...</string>
 </resources>

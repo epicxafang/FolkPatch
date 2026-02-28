@@ -888,4 +888,23 @@ Upewnij się, że aplikacja jest całkowicie zamknięta i ponownie otwarta, aby 
     <string name="umount_config_save_confirm">Potwierdzić zapisanie konfiguracji?</string>
     <string name="umount_config_save_success">Konfiguracja zapisana pomyślnie</string>
     <string name="umount_config_save_failed">Nie udało się zapisać konfiguracji</string>
+
+    <!-- Dialog Pobierania -->
+    <string name="theme_download_title">Pobieranie motywu</string>
+    <string name="theme_download_completed">Pobieranie zakończone</string>
+    <string name="theme_download_failed">Pobieranie nieudane</string>
+    <string name="theme_download_progress">Postęp</string>
+    <string name="theme_download_file">Plik motywu</string>
+    <string name="theme_download_image">Obraz podglądu</string>
+    <string name="theme_download_cancel">Anuluj</string>
+    <string name="theme_download_pause">Wstrzymaj</string>
+    <string name="theme_download_resume">Wznów</string>
+    <string name="theme_download_retry">Ponów</string>
+    <string name="theme_download_apply">Zastosuj motyw</string>
+    <string name="theme_download_go_to_my_themes">Moje motywy</string>
+    <string name="theme_download_retrying">Ponawianie (%d/3)...</string>
+    <string name="theme_download_preparing">Przygotowywanie pobierania...</string>
+    <string name="theme_download_downloading_file">Pobieranie pliku motywu...</string>
+    <string name="theme_download_downloading_image">Pobieranie obrazu podglądu...</string>
+    <string name="theme_download_finalizing">Finalizowanie...</string>
 </resources>

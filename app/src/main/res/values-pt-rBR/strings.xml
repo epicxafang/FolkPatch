@@ -887,4 +887,23 @@ Por favor, certifique-se de fechar completamente o app e reabri-lo para que os c
     <string name="umount_config_save_confirm">Confirmar salvar configuração?</string>
     <string name="umount_config_save_success">Configuração salva com sucesso</string>
     <string name="umount_config_save_failed">Falha ao salvar configuração</string>
+
+    <!-- Diálogo de Download -->
+    <string name="theme_download_title">Baixando Tema</string>
+    <string name="theme_download_completed">Download concluído</string>
+    <string name="theme_download_failed">Download falhou</string>
+    <string name="theme_download_progress">Progresso</string>
+    <string name="theme_download_file">Arquivo do Tema</string>
+    <string name="theme_download_image">Imagem de Visualização</string>
+    <string name="theme_download_cancel">Cancelar</string>
+    <string name="theme_download_pause">Pausar</string>
+    <string name="theme_download_resume">Retomar</string>
+    <string name="theme_download_retry">Tentar Novamente</string>
+    <string name="theme_download_apply">Aplicar Tema</string>
+    <string name="theme_download_go_to_my_themes">Meus Temas</string>
+    <string name="theme_download_retrying">Tentando Novamente (%d/3)...</string>
+    <string name="theme_download_preparing">Preparando download...</string>
+    <string name="theme_download_downloading_file">Baixando arquivo do tema...</string>
+    <string name="theme_download_downloading_image">Baixando imagem de visualização...</string>
+    <string name="theme_download_finalizing">Finalizando...</string>
 </resources>

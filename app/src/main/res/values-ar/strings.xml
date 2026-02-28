@@ -874,4 +874,23 @@
     <string name="umount_config_save_confirm">تأكيد حفظ التكوين؟</string>
     <string name="umount_config_save_success">تم حفظ التكوين بنجاح</string>
     <string name="umount_config_save_failed">فشل حفظ التكوين</string>
+
+    <!-- حوار التنزيل -->
+    <string name="theme_download_title">جارٍ تنزيل السمة</string>
+    <string name="theme_download_completed">اكتمل التنزيل</string>
+    <string name="theme_download_failed">فشل التنزيل</string>
+    <string name="theme_download_progress">التقدم</string>
+    <string name="theme_download_file">ملف السمة</string>
+    <string name="theme_download_image">صورة المعاينة</string>
+    <string name="theme_download_cancel">إلغاء</string>
+    <string name="theme_download_pause">إيقاف مؤقت</string>
+    <string name="theme_download_resume">استئناف</string>
+    <string name="theme_download_retry">إعادة المحاولة</string>
+    <string name="theme_download_apply">تطبيق السمة</string>
+    <string name="theme_download_go_to_my_themes">سماتي</string>
+    <string name="theme_download_retrying">إعادة المحاولة (%d/3)...</string>
+    <string name="theme_download_preparing">جارٍ تحضير التنزيل...</string>
+    <string name="theme_download_downloading_file">جارٍ تنزيل ملف السمة...</string>
+    <string name="theme_download_downloading_image">جارٍ تنزيل صورة المعاينة...</string>
+    <string name="theme_download_finalizing">جارٍ الانتهاء...</string>
 </resources>

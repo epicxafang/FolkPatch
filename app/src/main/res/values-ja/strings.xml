@@ -791,4 +791,23 @@
     <string name="umount_config_save_confirm">設定を保存しますか？</string>
     <string name="umount_config_save_success">設定を保存しました</string>
     <string name="umount_config_save_failed">設定の保存に失敗しました</string>
+
+    <!-- ダウンロードダイアログ -->
+    <string name="theme_download_title">テーマをダウンロード中</string>
+    <string name="theme_download_completed">ダウンロード完了</string>
+    <string name="theme_download_failed">ダウンロード失敗</string>
+    <string name="theme_download_progress">進捗</string>
+    <string name="theme_download_file">テーマファイル</string>
+    <string name="theme_download_image">プレビュー画像</string>
+    <string name="theme_download_cancel">キャンセル</string>
+    <string name="theme_download_pause">一時停止</string>
+    <string name="theme_download_resume">再開</string>
+    <string name="theme_download_retry">再試行</string>
+    <string name="theme_download_apply">テーマを適用</string>
+    <string name="theme_download_go_to_my_themes">マイテーマ</string>
+    <string name="theme_download_retrying">再試行中 (%d/3)...</string>
+    <string name="theme_download_preparing">ダウンロードを準備中...</string>
+    <string name="theme_download_downloading_file">テーマファイルをダウンロード中...</string>
+    <string name="theme_download_downloading_image">プレビュー画像をダウンロード中...</string>
+    <string name="theme_download_finalizing">完了中...</string>
 </resources>

@@ -744,6 +744,36 @@ Please ensure the app is completely closed and reopened for the commands to exec
     <string name="theme_store_filter_apply">Apply</string>
     <string name="theme_store_filter_reset">Reset</string>
 
+    <!-- My Themes Page -->
+    <string name="my_themes_title">My Themes</string>
+    <string name="my_themes_empty">No themes yet</string>
+    <string name="my_themes_empty_action">Browse Theme Store</string>
+    <string name="my_themes_apply">Apply Theme</string>
+    <string name="my_themes_delete">Delete Theme</string>
+    <string name="my_themes_delete_confirm">Are you sure you want to delete this theme?</string>
+    <string name="my_themes_deleted">Theme deleted</string>
+    <string name="my_themes_applied">Theme applied</string>
+    <string name="my_themes_details">Theme Details</string>
+
+    <!-- Download Dialog -->
+    <string name="theme_download_title">Downloading Theme</string>
+    <string name="theme_download_completed">Download completed</string>
+    <string name="theme_download_failed">Download failed</string>
+    <string name="theme_download_progress">Progress</string>
+    <string name="theme_download_file">Theme File</string>
+    <string name="theme_download_image">Preview Image</string>
+    <string name="theme_download_cancel">Cancel</string>
+    <string name="theme_download_pause">Pause</string>
+    <string name="theme_download_resume">Resume</string>
+    <string name="theme_download_retry">Retry</string>
+    <string name="theme_download_apply">Apply Theme</string>
+    <string name="theme_download_go_to_my_themes">My Themes</string>
+    <string name="theme_download_retrying">Retrying (%d/3)...</string>
+    <string name="theme_download_preparing">Preparing download...</string>
+    <string name="theme_download_downloading_file">Downloading theme file...</string>
+    <string name="theme_download_downloading_image">Downloading preview image...</string>
+    <string name="theme_download_finalizing">Finalizing...</string>
+
     <!-- File Picker -->
     <string name="file_picker_permission_required">Permission Required</string>
     <string name="file_picker_permission_desc">To browse files, please grant \'All files access\' permission.</string>

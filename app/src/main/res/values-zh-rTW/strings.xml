@@ -875,4 +875,23 @@
     <string name="umount_config_save_confirm">確認儲存配置？</string>
     <string name="umount_config_save_success">配置儲存成功</string>
     <string name="umount_config_save_failed">配置儲存失敗</string>
+
+    <!-- 下載對話框 -->
+    <string name="theme_download_title">正在下載主題</string>
+    <string name="theme_download_completed">下載完成</string>
+    <string name="theme_download_failed">下載失敗</string>
+    <string name="theme_download_progress">進度</string>
+    <string name="theme_download_file">主題檔案</string>
+    <string name="theme_download_image">預覽圖片</string>
+    <string name="theme_download_cancel">取消</string>
+    <string name="theme_download_pause">暫停</string>
+    <string name="theme_download_resume">繼續</string>
+    <string name="theme_download_retry">重試</string>
+    <string name="theme_download_apply">應用主題</string>
+    <string name="theme_download_go_to_my_themes">我的主題</string>
+    <string name="theme_download_retrying">正在重試 (%d/3)...</string>
+    <string name="theme_download_preparing">準備下載...</string>
+    <string name="theme_download_downloading_file">正在下載主題檔案...</string>
+    <string name="theme_download_downloading_image">正在下載預覽圖片...</string>
+    <string name="theme_download_finalizing">正在完成...</string>
 </resources>

@@ -886,4 +886,23 @@
     <string name="umount_config_save_confirm">Подтвердить сохранение конфигурации?</string>
     <string name="umount_config_save_success">Конфигурация успешно сохранена</string>
     <string name="umount_config_save_failed">Не удалось сохранить конфигурацию</string>
+
+    <!-- Диалог Загрузки -->
+    <string name="theme_download_title">Загрузка темы</string>
+    <string name="theme_download_completed">Загрузка завершена</string>
+    <string name="theme_download_failed">Ошибка загрузки</string>
+    <string name="theme_download_progress">Прогресс</string>
+    <string name="theme_download_file">Файл темы</string>
+    <string name="theme_download_image">Изображение предпросмотра</string>
+    <string name="theme_download_cancel">Отмена</string>
+    <string name="theme_download_pause">Пауза</string>
+    <string name="theme_download_resume">Продолжить</string>
+    <string name="theme_download_retry">Повторить</string>
+    <string name="theme_download_apply">Применить тему</string>
+    <string name="theme_download_go_to_my_themes">Мои темы</string>
+    <string name="theme_download_retrying">Повтор (%d/3)...</string>
+    <string name="theme_download_preparing">Подготовка загрузки...</string>
+    <string name="theme_download_downloading_file">Загрузка файла темы...</string>
+    <string name="theme_download_downloading_image">Загрузка изображения предпросмотра...</string>
+    <string name="theme_download_finalizing">Завершение...</string>
 </resources>

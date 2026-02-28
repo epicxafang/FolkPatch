@@ -6,19 +6,21 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.*
+import androidx.compose.ui.draw.clip
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.filled.FilterList
+import androidx.compose.material.icons.filled.Folder
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.window.DialogProperties
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -32,10 +34,15 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootGraph
+import com.ramcosta.composedestinations.generated.destinations.MyThemesScreenDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import me.bmax.apatch.R
 import me.bmax.apatch.ui.viewmodel.ThemeStoreViewModel
+import me.bmax.apatch.util.DownloadProgress
+import me.bmax.apatch.util.DownloadStatus
+import me.bmax.apatch.util.ThemeDownloader
 
 @Destination<RootGraph>
 @OptIn(ExperimentalMaterial3Api::class)
@@ -43,14 +50,47 @@ import me.bmax.apatch.ui.viewmodel.ThemeStoreViewModel
 fun ThemeStoreScreen(
     navigator: DestinationsNavigator
 ) {
-    val viewModel = viewModel<ThemeStoreViewModel>()
+    val viewModel = viewModel<ThemeStoreViewModel>(
+        factory = ThemeStoreViewModel.Factory(LocalContext.current)
+    )
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
     
     var selectedTheme by remember { mutableStateOf<ThemeStoreViewModel.RemoteTheme?>(null) }
+    var downloadingTheme by remember { mutableStateOf<ThemeStoreViewModel.RemoteTheme?>(null) }
+    var downloadCompletedTheme by remember { mutableStateOf<ThemeStoreViewModel.RemoteTheme?>(null) }
     var isSearchActive by remember { mutableStateOf(false) }
     var showFilterSheet by remember { mutableStateOf(false) }
+
+    // 监听下载进度
+    val downloadProgressFlow = remember { viewModel.getDownloadProgressFlow() }
+    var downloadProgress by remember { mutableStateOf<DownloadProgress?>(null) }
+
+    LaunchedEffect(downloadProgressFlow) {
+        downloadProgressFlow.collect { progressMap ->
+            downloadingTheme?.let { theme ->
+                downloadProgress = progressMap[theme.id]
+                
+                // 检查下载是否完成
+                if (downloadProgress?.status == DownloadStatus.COMPLETED) {
+                    downloadCompletedTheme = downloadingTheme
+                    downloadingTheme = null
+                    downloadProgress = null
+                } else if (downloadProgress?.status == DownloadStatus.FAILED) {
+                    // 下载失败
+                    scope.launch {
+                        snackbarHostState.showSnackbar(
+                            context.getString(R.string.theme_download_failed) + 
+                            ": ${downloadProgress?.errorMessage}"
+                        )
+                    }
+                    downloadingTheme = null
+                    downloadProgress = null
+                }
+            }
+        }
+    }
 
     LaunchedEffect(Unit) {
         if (viewModel.themes.isEmpty()) {
@@ -58,10 +98,64 @@ fun ThemeStoreScreen(
         }
     }
 
+    // 下载对话框
+    if (downloadingTheme != null && downloadProgress != null) {
+        ThemeDownloadDialog(
+            theme = downloadingTheme!!,
+            progress = downloadProgress!!,
+            onCancel = {
+                viewModel.cancelDownload(downloadingTheme!!.id)
+                downloadingTheme = null
+                downloadProgress = null
+            },
+            onPause = {
+                // TODO: 实现暂停功能
+            }
+        )
+    }
+
+    // 下载完成对话框
+    if (downloadCompletedTheme != null) {
+        val completedTheme = downloadCompletedTheme!!
+        ThemeDownloadCompleteDialog(
+            theme = completedTheme,
+            onApply = {
+                scope.launch {
+                    // 重新加载本地主题列表以确保最新
+                    viewModel.loadLocalThemes()
+                    // 等待一小段时间让列表更新
+                    kotlinx.coroutines.delay(100)
+                    val localTheme = viewModel.localThemes.find { it.id == completedTheme.id }
+                    if (localTheme != null) {
+                        val success = viewModel.applyTheme(localTheme)
+                        if (success) {
+                            snackbarHostState.showSnackbar(context.getString(R.string.my_themes_applied))
+                        } else {
+                            snackbarHostState.showSnackbar("Failed to apply theme")
+                        }
+                    } else {
+                        snackbarHostState.showSnackbar("Theme not found in local list")
+                    }
+                }
+                downloadCompletedTheme = null
+            },
+            onGoToMyThemes = {
+                navigator.navigate(MyThemesScreenDestination)
+                downloadCompletedTheme = null
+            },
+            onDismiss = {
+                downloadCompletedTheme = null
+            }
+        )
+    }
+
+    // 主题详情对话框
     if (selectedTheme != null) {
         val theme = selectedTheme!!
         val typeString = if (theme.type == "tablet") stringResource(R.string.theme_type_tablet) else stringResource(R.string.theme_type_phone)
         val sourceString = if (theme.source == "official") stringResource(R.string.theme_source_official) else stringResource(R.string.theme_source_third_party)
+        val isDownloaded = viewModel.isThemeDownloaded(theme.id)
+        val isDownloading = viewModel.isThemeDownloading(theme.id)
 
         AlertDialog(
             onDismissRequest = { selectedTheme = null },
@@ -89,30 +183,66 @@ fun ThemeStoreScreen(
                         text = theme.description,
                         style = MaterialTheme.typography.bodySmall
                     )
+                    if (isDownloaded) {
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = "✓ Already downloaded",
+                            color = MaterialTheme.colorScheme.primary,
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                    }
                 }
             },
             confirmButton = {
-                Button(
-                    onClick = {
-                        try {
-                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(theme.downloadUrl))
-                            context.startActivity(intent)
-                        } catch (e: Exception) {
+                if (isDownloaded) {
+                    Button(
+                        onClick = {
                             scope.launch {
-                                snackbarHostState.showSnackbar(context.getString(R.string.theme_store_download_failed))
+                                val localTheme = viewModel.localThemes.find { it.id == theme.id }
+                                if (localTheme != null) {
+                                    val success = viewModel.applyTheme(localTheme)
+                                    if (success) {
+                                        snackbarHostState.showSnackbar(context.getString(R.string.my_themes_applied))
+                                    }
+                                }
                             }
+                            selectedTheme = null
                         }
-                        selectedTheme = null
+                    ) {
+                        Text(stringResource(R.string.my_themes_apply))
                     }
-                ) {
-                    Icon(Icons.Filled.Download, contentDescription = null)
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(stringResource(R.string.theme_store_download))
+                } else if (isDownloading) {
+                    OutlinedButton(
+                        onClick = { selectedTheme = null },
+                        enabled = false
+                    ) {
+                        CircularProgressIndicator(modifier = Modifier.size(16.dp))
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text("Downloading...")
+                    }
+                } else {
+                    Button(
+                        onClick = {
+                            downloadingTheme = theme
+                            viewModel.startDownload(theme)
+                            selectedTheme = null
+                        }
+                    ) {
+                        Icon(Icons.Filled.Download, contentDescription = null)
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(stringResource(R.string.theme_store_download))
+                    }
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { selectedTheme = null }) {
+                    Text(stringResource(android.R.string.cancel))
                 }
             }
         )
     }
 
+    // 过滤器对话框
     if (showFilterSheet) {
         BasicAlertDialog(
             onDismissRequest = { showFilterSheet = false },
@@ -181,6 +311,10 @@ fun ThemeStoreScreen(
                     }
                 },
                 actions = {
+                    // "我的主题"按钮
+                    IconButton(onClick = { navigator.navigate(MyThemesScreenDestination) }) {
+                        Icon(Icons.Filled.Folder, contentDescription = "My Themes")
+                    }
                     if (isSearchActive) {
                         if (viewModel.searchQuery.isNotEmpty()) {
                             IconButton(onClick = { viewModel.onSearchQueryChange("") }) {
@@ -225,7 +359,6 @@ fun ThemeStoreScreen(
             }
         } else {
             LazyVerticalStaggeredGrid(
-                // Use 128.dp to ensure at least 2 columns on small phones (320dp+)
                 columns = StaggeredGridCells.Adaptive(minSize = 128.dp),
                 modifier = Modifier.fillMaxSize().padding(paddingValues),
                 contentPadding = PaddingValues(16.dp),
@@ -244,6 +377,148 @@ fun ThemeStoreScreen(
             }
         }
     }
+}
+
+/**
+ * 主题下载对话框
+ */
+@Composable
+fun ThemeDownloadDialog(
+    theme: ThemeStoreViewModel.RemoteTheme,
+    progress: DownloadProgress,
+    onCancel: () -> Unit,
+    onPause: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = { },
+        title = { Text(stringResource(R.string.theme_download_title)) },
+        text = {
+            Column {
+                // 主题信息
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    // 预览图（正方形加圆角）
+                    AsyncImage(
+                        model = ImageRequest.Builder(LocalContext.current)
+                            .data(theme.previewUrl)
+                            .crossfade(true)
+                            .build(),
+                        contentDescription = theme.name,
+                        modifier = Modifier
+                            .size(64.dp)
+                            .padding(end = 12.dp)
+                            .clip(RoundedCornerShape(8.dp)),
+                        contentScale = ContentScale.Crop
+                    )
+                    
+                    Column {
+                        Text(
+                            text = theme.name,
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                        Text(
+                            text = theme.author,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+                
+                Spacer(modifier = Modifier.height(16.dp))
+                
+                // 总进度条
+                Text(
+                    text = "${stringResource(R.string.theme_download_progress)}: ${(progress.overallProgress * 100).toInt()}%",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                LinearProgressIndicator(
+                    progress = { progress.overallProgress },
+                    modifier = Modifier.fillMaxWidth()
+                )
+                
+                Spacer(modifier = Modifier.height(16.dp))
+                
+                // 文件进度
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = "${stringResource(R.string.theme_download_file)}: ${(progress.fileProgress * 100).toInt()}%",
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                    Text(
+                        text = "${stringResource(R.string.theme_download_image)}: ${(progress.imageProgress * 100).toInt()}%",
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
+                
+                // 错误信息
+                if (progress.errorMessage != null) {
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = progress.errorMessage!!,
+                        color = MaterialTheme.colorScheme.error,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
+            }
+        },
+        confirmButton = {
+            Button(onClick = onCancel) {
+                Text(stringResource(R.string.theme_download_cancel))
+            }
+        },
+        dismissButton = {
+            OutlinedButton(
+                onClick = onPause,
+                enabled = false // TODO: 实现暂停功能
+            ) {
+                Text(stringResource(R.string.theme_download_pause))
+            }
+        }
+    )
+}
+
+/**
+ * 下载完成对话框
+ */
+@Composable
+fun ThemeDownloadCompleteDialog(
+    theme: ThemeStoreViewModel.RemoteTheme,
+    onApply: () -> Unit,
+    onGoToMyThemes: () -> Unit,
+    onDismiss: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { 
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(stringResource(R.string.theme_download_completed))
+            }
+        },
+        text = {
+            Column {
+                Text(
+                    text = "${theme.name} ${stringResource(R.string.theme_download_finalizing)}",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
+        },
+        confirmButton = {
+            Button(onClick = onApply) {
+                Text(stringResource(R.string.theme_download_apply))
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onGoToMyThemes) {
+                Text(stringResource(R.string.theme_download_go_to_my_themes))
+            }
+        }
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -273,7 +548,6 @@ fun ThemeFilterSheetContent(
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
-        // Author
         OutlinedTextField(
             value = author,
             onValueChange = { author = it },
@@ -285,7 +559,6 @@ fun ThemeFilterSheetContent(
         
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Source
         Text(
             text = stringResource(R.string.theme_store_filter_source),
             style = MaterialTheme.typography.titleMedium
@@ -322,7 +595,6 @@ fun ThemeFilterSheetContent(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Type
         Text(
             text = stringResource(R.string.theme_store_filter_type),
             style = MaterialTheme.typography.titleMedium
@@ -353,7 +625,6 @@ fun ThemeFilterSheetContent(
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Actions
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.End,
@@ -362,7 +633,6 @@ fun ThemeFilterSheetContent(
             TextButton(
                 onClick = {
                     onReset()
-                    // Reset local state too
                     author = ""
                     source = "all"
                     typePhone = true
@@ -393,7 +663,6 @@ fun ThemeGridItem(
             .clickable(onClick = onClick),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
-        // Only display cover as requested
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(theme.previewUrl)

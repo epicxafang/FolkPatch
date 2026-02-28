@@ -881,4 +881,23 @@ Komutların çalışması için uygulamanın tamamen kapatılıp yeniden açıld
     <string name="umount_config_save_confirm">Yapılandırmayı kaydetmeyi onaylıyor musunuz?</string>
     <string name="umount_config_save_success">Yapılandırma başarıyla kaydedildi</string>
     <string name="umount_config_save_failed">Yapılandırma kaydedilemedi</string>
-</resources>																	 
+
+    <!-- İndirme Diyaloğu -->
+    <string name="theme_download_title">Tema İndiriliyor</string>
+    <string name="theme_download_completed">İndirme tamamlandı</string>
+    <string name="theme_download_failed">İndirme başarısız</string>
+    <string name="theme_download_progress">İlerleme</string>
+    <string name="theme_download_file">Tema Dosyası</string>
+    <string name="theme_download_image">Önizleme Resmi</string>
+    <string name="theme_download_cancel">İptal</string>
+    <string name="theme_download_pause">Duraklat</string>
+    <string name="theme_download_resume">Devam Et</string>
+    <string name="theme_download_retry">Yeniden Dene</string>
+    <string name="theme_download_apply">Temayı Uygula</string>
+    <string name="theme_download_go_to_my_themes">Temalarım</string>
+    <string name="theme_download_retrying">Yeniden deneniyor (%d/3)...</string>
+    <string name="theme_download_preparing">İndirme hazırlanıyor...</string>
+    <string name="theme_download_downloading_file">Tema dosyası indiriliyor...</string>
+    <string name="theme_download_downloading_image">Önizleme resmi indiriliyor...</string>
+    <string name="theme_download_finalizing">Tamamlanıyor...</string>
+</resources>
