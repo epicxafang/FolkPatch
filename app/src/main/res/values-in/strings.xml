@@ -179,7 +179,7 @@
     <string name="su_pkg_root_setting_title">Superuser</string>
     <string name="su_pkg_root_setting_summary">Mengaktifkan opsi ini untuk memberikan akses superuser ke aplikasi Anda, aplikasi dapat menggunakan perintah SU</string>
     <string name="su_pkg_normal_setting_title">Mode Normal</string>
-    <string name="su_pkg_normal_setting_summary">Status default, tidak ada penanganan khusus.</string>
+    <string name="su_pkg_normal_setting_summary">Tidak ada akses root yang diberikan, aplikasi berjalan tanpa hak istimewa superuser.</string>
     <string name="su_batch_exclude_title">Pengecualian Massal</string>
     <string name="su_batch_exclude_content">Kecualikan injeksi untuk semua aplikasi non-Root, pilih tindakan</string>
     <string name="su_exclude_btn">Kecualikan</string>

@@ -13,6 +13,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.outlined.OpenInNew
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.RemoveCircle
 import androidx.compose.material.icons.filled.Security
@@ -30,17 +31,20 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import kotlinx.coroutines.launch
 import me.bmax.apatch.APApplication
 import me.bmax.apatch.Natives
 import me.bmax.apatch.R
@@ -57,6 +61,10 @@ fun AppProfileScreen(
     packageName: String,
     uid: Int
 ) {
+    val viewModel = viewModel<SuperUserViewModel>()
+    val scope = rememberCoroutineScope()
+    val context = LocalContext.current
+    
     val appInfoState = remember(packageName, uid) {
         derivedStateOf {
             SuperUserViewModel.apps.find { it.packageName == packageName && it.uid == uid }
@@ -70,7 +78,7 @@ fun AppProfileScreen(
 
     val config = appInfo.config
     
-    // 0: ROOT, 1: Normal, 2: Exclude
+    // 0: ROOT, 1: NO ROOT, 2: Exclude
     var selectedIndex by remember(config) { 
         mutableIntStateOf(
             when {
@@ -89,6 +97,24 @@ fun AppProfileScreen(
                 navigationIcon = {
                     IconButton(onClick = { navigator.popBackStack() }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
+                    }
+                },
+                actions = {
+                    IconButton(onClick = {
+                        val success = viewModel.launchApp(context, appInfo.packageName)
+                        scope.launch {
+                            android.widget.Toast.makeText(
+                                context,
+                                if (success) {
+                                    context.getString(R.string.su_app_action_launch_success, appInfo.label)
+                                } else {
+                                    context.getString(R.string.su_app_action_failed, appInfo.label)
+                                },
+                                android.widget.Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }) {
+                        Icon(Icons.AutoMirrored.Outlined.OpenInNew, contentDescription = stringResource(R.string.su_app_action_launch))
                     }
                 },
                 windowInsets = WindowInsets.safeDrawing.only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal)
@@ -120,7 +146,7 @@ fun AppProfileScreen(
             )
 
             SegmentedControl(
-                items = listOf("ROOT", "Normal", "Exclude"),
+                items = listOf("ROOT", "NO ROOT", "Exclude"),
                 selectedIndex = selectedIndex,
                 onItemSelection = { index ->
                     selectedIndex = index
@@ -134,7 +160,7 @@ fun AppProfileScreen(
                             Natives.grantSu(appInfo.uid, 0, config.profile.scontext)
                             Natives.setUidExclude(appInfo.uid, 0)
                         }
-                        1 -> { // Normal
+                        1 -> { // NO ROOT
                             config.allow = 0
                             config.exclude = 0
                             Natives.revokeSu(appInfo.uid)

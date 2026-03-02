@@ -206,7 +206,7 @@
     <string name="su_pkg_root_setting_title">المستخدم المتميز</string>
     <string name="su_pkg_root_setting_summary">تفعيل هذا الخيار لمنح صلاحيات المستخدم المتميز لتطبيقك، مما يسمح باستخدام أوامر SU</string>
     <string name="su_pkg_normal_setting_title">الوضع العادي</string>
-    <string name="su_pkg_normal_setting_summary">الحالة الافتراضية، بدون معالجة خاصة。</string>
+    <string name="su_pkg_normal_setting_summary">لم يتم منح حق الوصول إلى الجذر، يتم تشغيل التطبيق بدون صلاحيات المستخدم المتميز.</string>
     <string name="su_show_system_apps">إظهار تطبيقات النظام</string>
     <string name="su_hide_system_apps">إخفاء تطبيقات النظام</string>
     <string name="su_refresh">تحديث</string>

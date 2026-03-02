@@ -206,7 +206,7 @@
     <string name="su_pkg_root_setting_title">Superusuario</string>
     <string name="su_pkg_root_setting_summary">Habilitar esta opción para otorgar acceso de superusuario a tu app, permitiendo usar comandos SU</string>
     <string name="su_pkg_normal_setting_title">Modo normal</string>
-    <string name="su_pkg_normal_setting_summary">Estado predeterminado, sin procesamiento especial.</string>
+    <string name="su_pkg_normal_setting_summary">No se ha concedido acceso root, la aplicación se ejecuta sin privilegios de superusuario.</string>
     <string name="su_show_system_apps">Mostrar apps del sistema</string>
     <string name="su_hide_system_apps">Ocultar apps del sistema</string>
     <string name="su_refresh">Actualizar</string>

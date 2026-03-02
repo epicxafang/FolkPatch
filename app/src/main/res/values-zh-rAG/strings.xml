@@ -201,8 +201,8 @@
     <string name="su_pkg_excluded_setting_summary">开这个，FolkPatch就能恢复这应用改过的文件哒喵！</string>
     <string name="su_pkg_root_setting_title">超级用户喵</string>
     <string name="su_pkg_root_setting_summary">开这个为你的软件启动超级用户喵，软件能够使用SU命令喵</string>
-    <string name="su_pkg_normal_setting_title">普通模式喵</string>
-    <string name="su_pkg_normal_setting_summary">默认状态，不做任何特殊处理喵。</string>
+    <string name="su_pkg_normal_setting_title">常规模式喵</string>
+    <string name="su_pkg_normal_setting_summary">不授予 root 权限，应用在没有超级用户权限下运行喵。</string>
     <string name="su_show_system_apps">显示系统应用喵</string>
     <string name="su_hide_system_apps">藏起系统应用喵</string>
     <string name="su_refresh">刷新一下喵！</string>

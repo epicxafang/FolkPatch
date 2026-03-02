@@ -179,7 +179,7 @@
     <string name="su_pkg_root_setting_title">Суперпользователь</string>
     <string name="su_pkg_root_setting_summary">Включение этой опции предоставит доступ суперпользователя вашему приложению, позволяя использовать команды SU.</string>
     <string name="su_pkg_normal_setting_title">Обычный режим</string>
-    <string name="su_pkg_normal_setting_summary">Состояние по умолчанию, без специальной обработки.</string>
+    <string name="su_pkg_normal_setting_summary">Доступ root не предоставлен, приложение работает без привилегий суперпользователя.</string>
     <string name="su_batch_exclude_title">Пакетное исключение</string>
     <string name="su_batch_exclude_content">Исключить инъекцию для всех не-ROOT приложений, выберите действие</string>
     <string name="su_exclude_btn">Исключить</string>

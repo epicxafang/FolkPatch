@@ -172,8 +172,8 @@
     <string name="su_pkg_excluded_setting_summary">啟用此選項將允許 FolkPatch 還原此應用程式被模組修改的任何檔案。</string>
     <string name="su_pkg_root_setting_title">超級使用者</string>
     <string name="su_pkg_root_setting_summary">啟用此選項為您的軟體啟動超級使用者，軟體能夠使用 SU 指令</string>
-    <string name="su_pkg_normal_setting_title">一般模式</string>
-    <string name="su_pkg_normal_setting_summary">預設狀態，不做任何特殊處理。</string>
+    <string name="su_pkg_normal_setting_title">常規模式</string>
+    <string name="su_pkg_normal_setting_summary">不授予 root 權限，應用在沒有超級用戶權限下運行。</string>
     <string name="su_batch_exclude_title">批次排除</string>
     <string name="su_batch_exclude_content">為全部非 Root 權限應用程式排除注入，請選擇一個操作</string>
     <string name="su_exclude_btn">排除</string>

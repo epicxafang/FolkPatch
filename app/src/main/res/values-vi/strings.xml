@@ -186,8 +186,8 @@
     <string name="su_pkg_excluded_setting_summary">Bật tùy chọn này sẽ cho phép FolkPatch khôi phục mọi tệp đã được module ứng dụng này sửa đổi。</string>
     <string name="su_pkg_root_setting_title">Superuser</string>
     <string name="su_pkg_root_setting_summary">Bật tùy chọn này để cấp quyền superuser cho ứng dụng của bạn, ứng dụng có thể sử dụng lệnh SU</string>
-    <string name="su_pkg_normal_setting_title">Chế độ bình thường</string>
-    <string name="su_pkg_normal_setting_summary">Trạng thái mặc định, không xử lý đặc biệt nào.</string>
+    <string name="su_pkg_normal_setting_title">Chế độ thường</string>
+    <string name="su_pkg_normal_setting_summary">Không cấp quyền root, ứng dụng chạy không có đặc quyền superuser.</string>
     <string name="su_show_system_apps">Hiển thị ứng dụng hệ thống</string>
     <string name="su_hide_system_apps">Ẩn ứng dụng hệ thống</string>
     <string name="su_refresh">Làm mới</string>

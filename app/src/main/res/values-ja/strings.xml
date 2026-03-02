@@ -169,7 +169,7 @@
     <string name="su_pkg_root_setting_title">スーパーユーザー</string>
     <string name="su_pkg_root_setting_summary">このオプションを有効化すると、アプリへのスーパーユーザーアクセスが許可され SU コマンドを使用できるようになります。</string>
     <string name="su_pkg_normal_setting_title">通常モード</string>
-    <string name="su_pkg_normal_setting_summary">デフォルト、特別な処理はしません。</string>
+    <string name="su_pkg_normal_setting_summary">root 権限は付与されません。アプリはスーパーユーザー権限なしで実行されます。</string>
     <string name="su_show_system_apps">システムアプリを表示</string>
     <string name="su_hide_system_apps">システムアプリを非表示</string>
     <string name="su_refresh">更新</string>

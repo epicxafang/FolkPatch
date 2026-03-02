@@ -178,7 +178,7 @@
     <string name="su_pkg_root_setting_title">Superużytkownik</string>
     <string name="su_pkg_root_setting_summary">Włączenie tej opcji przyzna dostęp superużytkownika Twojej aplikacji, pozwalając na używanie poleceń SU</string>
     <string name="su_pkg_normal_setting_title">Tryb normalny</string>
-    <string name="su_pkg_normal_setting_summary">Stan domyślny, bez specjalnej obsługi.</string>
+    <string name="su_pkg_normal_setting_summary">Brak dostępu root, aplikacja działa bez uprawnień superużytkownika.</string>
     <string name="su_batch_exclude_title">Masowe wykluczanie</string>
     <string name="su_batch_exclude_content">Wyklucz wstrzykiwanie dla wszystkich aplikacji bez roota, wybierz działanie</string>
     <string name="su_exclude_btn">Wyklucz</string>

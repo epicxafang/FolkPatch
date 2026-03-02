@@ -186,7 +186,7 @@
     <string name="su_pkg_root_setting_title">圣光使者</string>
     <string name="su_pkg_root_setting_summary">启用此选项为你的圣光使者赋予圣光之辉，能使用圣光咒语</string>
     <string name="su_pkg_normal_setting_title">凡尘模式</string>
-    <string name="su_pkg_normal_setting_summary">凡尘状态，不给予特殊祝福。</string>
+    <string name="su_pkg_normal_setting_summary">凡尘状态，无圣光之辉，不赋予圣光使者之力。</string>
     <string name="su_show_system_apps">显示系统圣光使者</string>
     <string name="su_hide_system_apps">隐藏系统圣光使者</string>
     <string name="su_refresh">更新圣光阵</string>

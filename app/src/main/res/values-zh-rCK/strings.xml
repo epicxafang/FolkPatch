@@ -192,8 +192,8 @@
     <string name="su_pkg_excluded_setting_summary">启用此选项将允许 FolkPatch 恢复此餐厅招牌菜修改的任何菜谱。</string>
     <string name="su_pkg_root_setting_title">首席大厨权限</string>
     <string name="su_pkg_root_setting_summary">启用该选项为你的餐厅软件启动首席大厨,餐厅软件能够使用 SU 命令</string>
-    <string name="su_pkg_normal_setting_title">普通模式</string>
-    <string name="su_pkg_normal_setting_summary">默认状态，不做任何特殊烹饪处理。</string>
+    <string name="su_pkg_normal_setting_title">学徒模式</string>
+    <string name="su_pkg_normal_setting_summary">普通学徒状态，无首席大厨权限，不能使用特殊菜谱。</string>
     <string name="su_show_system_apps">显示餐厅菜谱</string>
     <string name="su_hide_system_apps">隐藏餐厅菜谱</string>
     <string name="su_refresh">刷新</string>

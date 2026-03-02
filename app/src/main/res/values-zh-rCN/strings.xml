@@ -192,8 +192,8 @@
     <string name="su_pkg_excluded_setting_summary">启用此选项将允许 FolkPatch 恢复此应用模块修改的任何文件。</string>
     <string name="su_pkg_root_setting_title">超级用户</string>
     <string name="su_pkg_root_setting_summary">启用该选项为你的软件启动超级用户,软件能够使用SU命令</string>
-    <string name="su_pkg_normal_setting_title">普通模式</string>
-    <string name="su_pkg_normal_setting_summary">默认状态，不做任何特殊处理。</string>
+    <string name="su_pkg_normal_setting_title">常规模式</string>
+    <string name="su_pkg_normal_setting_summary">不授予 root 权限，应用在没有超级用户权限下运行。</string>
     <string name="su_show_system_apps">显示系统应用</string>
     <string name="su_hide_system_apps">隐藏系统应用</string>
     <string name="su_refresh">刷新</string>

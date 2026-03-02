@@ -186,8 +186,8 @@
     <string name="su_pkg_excluded_setting_summary">启用此选项将允许魔法工坊恢复此应用所受的魔法影响。</string>
     <string name="su_pkg_root_setting_title">魔法使</string>
     <string name="su_pkg_root_setting_summary">启用此选项为你的应用启动魔法少女之力，应用能够使用魔法咒语</string>
-    <string name="su_pkg_normal_setting_title">普通模式</string>
-    <string name="su_pkg_normal_setting_summary">默认状态，不做任何魔法加持。</string>
+    <string name="su_pkg_normal_setting_title">凡人模式</string>
+    <string name="su_pkg_normal_setting_summary">凡人状态，无魔法少女之力加持，不能使用魔法咒语。</string>
     <string name="su_show_system_apps">显示系统魔法使</string>
     <string name="su_hide_system_apps">隐藏系统魔法使</string>
     <string name="su_refresh">刷新魔法阵</string>
