@@ -950,17 +950,20 @@ private fun BottomBar(
                 }
             }
         } else {
-            // Non-floating mode: use standard NavigationBar
+            // Non-floating mode: use standard NavigationBar.
+            // Use the same single-selection logic as floating mode (effectiveSelectedIndex)
+            // so that only one item is visually highlighted even if multiple routes are
+            // present anywhere on the back stack.
             NavigationBar(
                 tonalElevation = if (BackgroundConfig.isCustomBackgroundEnabled) 0.dp else 8.dp,
                 containerColor = containerColor
             ) {
-                visibleDestinations.forEach { destination ->
+                visibleDestinations.forEachIndexed { index, destination ->
                     key(destination) {
                         val isCurrentDestOnBackStack by navController.isRouteOnBackStackAsState(destination.direction)
 
                         NavigationBarItem(
-                            selected = isCurrentDestOnBackStack,
+                            selected = index == effectiveSelectedIndex,
                             onClick = {
                                 onUserInteraction?.invoke()
                                 if (me.bmax.apatch.ui.theme.SoundEffectConfig.scope == me.bmax.apatch.ui.theme.SoundEffectConfig.SCOPE_BOTTOM_BAR) {
