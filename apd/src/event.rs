@@ -1,3 +1,12 @@
+use crate::mpolicy::get_policy_main;
+use anyhow::{Context, Result};
+use libc::SIGPWR;
+use log::{info, warn};
+use notify::{
+    event::{ModifyKind, RenameMode},
+    Config, Event, EventKind, INotifyWatcher, RecursiveMode, Watcher,
+};
+use signal_hook::{consts::signal::*, iterator::Signals};
 use std::{
     env,
     ffi::CStr,
@@ -10,39 +19,56 @@ use std::{
     time::Duration,
 };
 
-use anyhow::{Context, Result};
-use libc::SIGPWR;
-use log::{info, warn};
-use notify::{
-    Config, Event, EventKind, INotifyWatcher, RecursiveMode, Watcher,
-    event::{ModifyKind, RenameMode},
-};
-use signal_hook::{consts::signal::*, iterator::Signals};
-
 use crate::{
-    assets, defs, metamodule, module, restorecon, supercall,
-    supercall::{
-        fork_for_result, init_load_package_uid_config, init_load_su_path, refresh_ap_package_list,
-    },
+    assets, defs, lua, metamodule, module, restorecon, supercall,
+    supercall::{init_load_package_uid_config, init_load_su_path, refresh_ap_package_list},
     utils::{self, switch_cgroups},
 };
 
+pub fn report_kernel(superkey: Option<String>, event: &str, state: &str) -> Result<()> {
+    let args = vec![
+        superkey.unwrap_or_default(),
+        "event".to_string(),
+        event.to_string(),
+        state.to_string(),
+    ];
+    let args_ref: Vec<&str> = args.iter().map(|s| s.as_str()).collect();
+    let _ = utils::run_command("truncate", &args_ref, None)?.wait()?;
+    Ok(())
+}
+
 pub fn on_post_data_fs(superkey: Option<String>) -> Result<()> {
     utils::umask(0);
+    report_kernel(superkey.clone(), "post-fs-data", "before")?;
     use std::process::Stdio;
+
+    // Create /data/adb/fp directory for hide and umount binaries
+    let fp_dir = Path::new("/data/adb/fp");
+    if !fp_dir.exists() {
+        fs::create_dir_all(fp_dir).with_context(|| "Failed to create /data/adb/fp directory")?;
+        let permissions = fs::Permissions::from_mode(0o755);
+        fs::set_permissions(fp_dir, permissions)
+            .with_context(|| "Failed to set permissions for /data/adb/fp")?;
+        info!("Created directory: /data/adb/fp");
+    }
+
     #[cfg(unix)]
     init_load_package_uid_config(&superkey);
 
     init_load_su_path(&superkey);
 
-    let args = ["/data/adb/ap/bin/magiskpolicy", "--magisk", "--live"];
-    fork_for_result("/data/adb/ap/bin/magiskpolicy", &args, &superkey);
+    let mut sepol = get_policy_main(&["magiskpolicy".to_string(), "--live".to_string()])?;
+    sepol.magisk_rules();
+    sepol
+        .to_file("/sys/fs/selinux/load")
+        .context("Cannot apply policy")?;
 
     info!("Re-privilege apd profile after injecting sepolicy");
     supercall::privilege_apd_profile(&superkey);
 
     if utils::has_magisk() {
         warn!("Magisk detected, skip post-fs-data!");
+        report_kernel(superkey.clone(), "post-fs-data", "after")?;
         return Ok(());
     }
 
@@ -54,28 +80,28 @@ pub fn on_post_data_fs(superkey: Option<String>) -> Result<()> {
             .expect("Failed to set permissions");
     }
     let command_string = format!(
-        "rm -rf {}*.old.log; for file in {}*; do mv \"$file\" \"$file.old.log\"; done",
-        defs::APATCH_LOG_FOLDER,
+        "cd {}; rm -f *.last; [ -f dmesg.log ] && mv dmesg.log dmesg.last; [ -f logcat.log ] && mv logcat.log logcat.last; [ -f locat.log ] && mv locat.log logcat.last; rm -f *.log *.old.log",
         defs::APATCH_LOG_FOLDER
     );
     let mut args = vec!["-c", &command_string];
     // for all file to .old
     let result = utils::run_command("sh", &args, None)?.wait()?;
     if result.success() {
-        info!("Successfully deleted .old files.");
+        info!("Successfully rotated logs.");
     } else {
-        info!("Failed to delete .old files.");
+        info!("Failed to rotate logs.");
     }
-    let logcat_path = format!("{}locat.log", defs::APATCH_LOG_FOLDER);
+    let logcat_path = format!("{}logcat.log", defs::APATCH_LOG_FOLDER);
     let dmesg_path = format!("{}dmesg.log", defs::APATCH_LOG_FOLDER);
     let bootlog = fs::File::create(dmesg_path)?;
     args = vec![
         "-s",
         "9",
-        "120s",
+        "45s",
         "logcat",
         "-b",
         "main,system,crash",
+        "DrmLibFs:S",
         "-f",
         &logcat_path,
         "logcatcher-bootlog:S",
@@ -173,13 +199,66 @@ pub fn on_post_data_fs(superkey: Option<String>) -> Result<()> {
         }
     }
 
+    // Execute Hide Service if enabled
+    if Path::new(defs::HIDE_SERVICE_FILE).exists() {
+        info!("Hide Service enabled, executing hide binary...");
+        if Path::new(defs::HIDE_BINARY_PATH).exists() {
+            let result = Command::new(defs::HIDE_BINARY_PATH).status();
+            match result {
+                Ok(status) => {
+                    if status.success() {
+                        info!("Hide binary executed successfully");
+                    } else {
+                        warn!("Hide binary exited with status: {:?}", status.code());
+                    }
+                }
+                Err(e) => {
+                    warn!("Failed to execute hide binary: {}", e);
+                }
+            }
+        } else {
+            warn!(
+                "Hide binary not found at {}, please copy it manually",
+                defs::HIDE_BINARY_PATH
+            );
+        }
+    } else {
+        info!("Hide Service disabled");
+    }
+
+    // Execute Umount Service if enabled
+    if Path::new(defs::UMOUNT_SERVICE_FILE).exists() {
+        info!("Umount Service enabled, executing umount binary...");
+        if Path::new(defs::UMOUNT_BINARY_PATH).exists() {
+            let result = Command::new(defs::UMOUNT_BINARY_PATH).status();
+            match result {
+                Ok(status) => {
+                    if status.success() {
+                        info!("Umount binary executed successfully");
+                    } else {
+                        warn!("Umount binary exited with status: {:?}", status.code());
+                    }
+                }
+                Err(e) => {
+                    warn!("Failed to execute umount binary: {}", e);
+                }
+            }
+        } else {
+            warn!(
+                "Umount binary not found at {}, please copy it manually",
+                defs::UMOUNT_BINARY_PATH
+            );
+        }
+    } else {
+        info!("Umount Service disabled");
+    }
+
     // exec modules post-fs-data scripts
     // TODO: Add timeout
     if let Err(e) = module::exec_stage_script("post-fs-data", true) {
         warn!("exec post-fs-data scripts failed: {}", e);
     }
-    if let Err(e) = module::exec_stage_lua("post-fs-data", true, superkey.as_deref().unwrap_or(""))
-    {
+    if let Err(e) = lua::exec_stage_lua("post-fs-data", true, superkey.as_deref().unwrap_or("")) {
         warn!("Failed to exec post-fs-data lua: {}", e);
     }
     // load system.prop
@@ -190,7 +269,9 @@ pub fn on_post_data_fs(superkey: Option<String>) -> Result<()> {
     info!("remove update flag");
     let _ = fs::remove_file(module_update_flag);
 
-    run_stage("post-mount", superkey, true);
+    run_stage("post-mount", superkey.clone(), true);
+
+    report_kernel(superkey, "post-fs-data", "after")?;
 
     env::set_current_dir("/").with_context(|| "failed to chdir to /")?;
 
@@ -224,7 +305,7 @@ fn run_stage(stage: &str, superkey: Option<String>, block: bool) {
     if let Err(e) = module::exec_stage_script(stage, block) {
         warn!("Failed to exec {stage} scripts: {e}");
     }
-    if let Err(e) = module::exec_stage_lua(stage, block, superkey.as_deref().unwrap_or("")) {
+    if let Err(e) = lua::exec_stage_lua(stage, block, superkey.as_deref().unwrap_or("")) {
         warn!("Failed to exec {stage} lua: {e}");
     }
 }
