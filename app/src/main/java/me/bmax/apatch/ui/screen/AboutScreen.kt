@@ -67,7 +67,7 @@ fun AboutScreen(navigator: DestinationsNavigator) {
                 Image(
                     painter = painterResource(id = R.drawable.about),
                     contentDescription = stringResource(R.string.app_name),
-                    modifier = Modifier.scale(0.7f)
+                    modifier = Modifier.scale(1.15f)
                 )
             }
 

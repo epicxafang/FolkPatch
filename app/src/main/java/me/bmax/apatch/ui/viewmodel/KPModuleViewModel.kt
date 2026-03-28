@@ -21,12 +21,17 @@ class KPModuleViewModel : ViewModel() {
         private var modules by mutableStateOf<List<KPModel.KPMInfo>>(emptyList())
     }
 
+    var search by mutableStateOf("")
+
     var isRefreshing by mutableStateOf(false)
         private set
 
     val moduleList by derivedStateOf {
         val comparator = compareBy(Collator.getInstance(Locale.getDefault()), KPModel.KPMInfo::name)
-        modules.sortedWith(comparator).also {
+        modules.filter {
+            it.name.contains(search, true) ||
+                it.author.contains(search, true)
+        }.sortedWith(comparator).also {
             isRefreshing = false
         }
     }
