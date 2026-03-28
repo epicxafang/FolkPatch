@@ -31,8 +31,11 @@ import top.yukonga.miuix.kmp.basic.IconButton
 import top.yukonga.miuix.kmp.basic.Scaffold
 import top.yukonga.miuix.kmp.basic.TopAppBar
 import top.yukonga.miuix.kmp.extra.SuperArrow
+import top.yukonga.miuix.kmp.extra.SuperRadioButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 
 var selectedBootImage: Uri? = null
 
@@ -118,7 +121,10 @@ private fun SelectInstallMethod(
     val dialogTitle = stringResource(id = android.R.string.dialog_alert_title)
     val dialogContent = stringResource(id = R.string.mode_select_page_install_inactive_slot_warning)
 
+    val selectedMethod = remember { mutableStateOf<InstallMethod?>(null) }
+
     val onClick = { option: InstallMethod ->
+        selectedMethod.value = option
         when (option) {
             is InstallMethod.SelectFile -> {
                 // Reset before selecting
@@ -143,18 +149,11 @@ private fun SelectInstallMethod(
 
     Column {
         radioOptions.forEach { option ->
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .fillMaxWidth()
-            ) {
-                SuperArrow(
-                    title = stringResource(id = option.label),
-                    onClick = {
-                        onClick(option)
-                    }
-                )
-            }
+            SuperRadioButton(
+                title = stringResource(id = option.label),
+                selected = selectedMethod.value == option,
+                onClick = { onClick(option) }
+            )
         }
     }
 }

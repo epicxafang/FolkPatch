@@ -27,6 +27,20 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 @Composable
 fun UninstallModeSelectScreen(navigator: DestinationsNavigator) {
 
+    val options = listOf(
+        R.string.home_dialog_uninstall_all to {
+            APApplication.uninstallApatch()
+            navigator.navigate(PatchesDestination(PatchesViewModel.PatchMode.UNPATCH))
+        },
+        R.string.home_dialog_restore_image to {
+            navigator.navigate(PatchesDestination(PatchesViewModel.PatchMode.UNPATCH))
+        },
+        R.string.home_dialog_uninstall_ap_only to {
+            APApplication.uninstallApatch()
+            navigator.popBackStack()
+        },
+    )
+
     Scaffold(
         modifier = Modifier.padding(16.dp),
         topBar = {
@@ -37,26 +51,13 @@ fun UninstallModeSelectScreen(navigator: DestinationsNavigator) {
             modifier = Modifier.padding(paddingValues)
         ) {
             Card {
-                SuperArrow(
-                    title = stringResource(R.string.home_dialog_uninstall_all),
-                    onClick = {
-                        APApplication.uninstallApatch()
-                        navigator.navigate(PatchesDestination(PatchesViewModel.PatchMode.UNPATCH))
-                    }
-                )
-                SuperArrow(
-                    title = stringResource(R.string.home_dialog_restore_image),
-                    onClick = {
-                        navigator.navigate(PatchesDestination(PatchesViewModel.PatchMode.UNPATCH))
-                    }
-                )
-                SuperArrow(
-                    title = stringResource(R.string.home_dialog_uninstall_ap_only),
-                    onClick = {
-                        APApplication.uninstallApatch()
-                        navigator.popBackStack()
-                    }
-                )
+                options.forEach { (titleRes, action) ->
+                    SuperArrow(
+                        title = stringResource(titleRes),
+                        summary = null,
+                        onClick = { action() }
+                    )
+                }
             }
         }
     }
