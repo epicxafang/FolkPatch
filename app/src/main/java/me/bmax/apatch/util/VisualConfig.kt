@@ -1,6 +1,5 @@
 package me.bmax.apatch.util
 
-import android.os.Build
 import androidx.core.content.edit
 import me.bmax.apatch.APApplication
 
@@ -15,16 +14,13 @@ object VisualConfig {
 
     private val prefs get() = APApplication.sharedPreferences
 
-    private val isSupportedDevice = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
-
     var keyColor: Int
         get() = prefs.getInt(KEY_KEY_COLOR, 0)
         set(value) = prefs.edit { putInt(KEY_KEY_COLOR, value) }
 
     var enableBlur: Boolean
-        get() = isSupportedDevice && prefs.getBoolean(KEY_ENABLE_BLUR, true)
+        get() = prefs.getBoolean(KEY_ENABLE_BLUR, false)
         set(value) {
-            if (!isSupportedDevice) return
             prefs.edit { putBoolean(KEY_ENABLE_BLUR, value) }
             if (!value && enableLiquidGlass) {
                 enableLiquidGlass = false
@@ -32,20 +28,16 @@ object VisualConfig {
         }
 
     var enableFloatingBottomBar: Boolean
-        get() = isSupportedDevice && prefs.getBoolean(KEY_ENABLE_FLOATING_BOTTOM_BAR, true)
-        set(value) {
-            if (!isSupportedDevice) return
-            prefs.edit { putBoolean(KEY_ENABLE_FLOATING_BOTTOM_BAR, value) }
-        }
+        get() = prefs.getBoolean(KEY_ENABLE_FLOATING_BOTTOM_BAR, false)
+        set(value) = prefs.edit { putBoolean(KEY_ENABLE_FLOATING_BOTTOM_BAR, value) }
 
     var floatingBottomBarAutoHide: Boolean
         get() = prefs.getBoolean(KEY_FLOATING_BOTTOM_BAR_AUTO_HIDE, true)
         set(value) = prefs.edit { putBoolean(KEY_FLOATING_BOTTOM_BAR_AUTO_HIDE, value) }
 
     var enableLiquidGlass: Boolean
-        get() = isSupportedDevice && prefs.getBoolean(KEY_ENABLE_LIQUID_GLASS, true)
+        get() = prefs.getBoolean(KEY_ENABLE_LIQUID_GLASS, false)
         set(value) {
-            if (!isSupportedDevice) return
             if (value && !enableBlur) {
                 enableBlur = true
             }

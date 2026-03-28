@@ -326,27 +326,25 @@ fun SettingScreen(navigator: DestinationsNavigator) {
                         )
                     }
 
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                        var enableBlur by rememberSaveable {
-                            mutableStateOf(VisualConfig.enableBlur)
-                        }
-                        SuperSwitch(
-                            title = stringResource(id = R.string.settings_enable_blur),
-                            summary = stringResource(id = R.string.settings_enable_blur_summary),
-                            checked = enableBlur,
-                            startAction = {
-                                Icon(
-                                    Icons.Rounded.BlurOn,
-                                    null,
-                                    modifier = Modifier.padding(end = 6.dp)
-                                )
-                            },
-                            onCheckedChange = {
-                                VisualConfig.enableBlur = it
-                                enableBlur = VisualConfig.enableBlur
-                            }
-                        )
+                    var enableBlur by rememberSaveable {
+                        mutableStateOf(VisualConfig.enableBlur)
                     }
+                    SuperSwitch(
+                        title = stringResource(id = R.string.settings_enable_blur),
+                        summary = stringResource(id = R.string.settings_enable_blur_summary),
+                        checked = enableBlur,
+                        startAction = {
+                            Icon(
+                                Icons.Rounded.BlurOn,
+                                null,
+                                modifier = Modifier.padding(end = 6.dp)
+                            )
+                        },
+                        onCheckedChange = {
+                            VisualConfig.enableBlur = it
+                            enableBlur = VisualConfig.enableBlur
+                        }
+                    )
 
                     SuperSwitch(
                         title = stringResource(id = R.string.settings_floating_bottom_bar),
@@ -390,7 +388,7 @@ fun SettingScreen(navigator: DestinationsNavigator) {
                     }
 
                     AnimatedVisibility(
-                        visible = enableFloatingBottomBar && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
+                        visible = enableFloatingBottomBar && enableBlur
                     ) {
                         var enableLiquidGlass by rememberSaveable {
                             mutableStateOf(VisualConfig.enableLiquidGlass)

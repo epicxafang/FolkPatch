@@ -396,9 +396,15 @@ class MainActivity : AppCompatActivity() {
                     bottomBarVisibleState.value = showBottomBar
 
                     // Haze state for standard blur mode
-                    val hazeState = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                        remember { HazeState() }
-                    } else null
+                    val hazeState = remember(enableBlur, enableFloatingBottomBar) {
+                        try {
+                            if (enableBlur || enableFloatingBottomBar) HazeState() else null
+                        } catch (_: Throwable) {
+                            VisualConfig.enableBlur = false
+                            VisualConfig.enableFloatingBottomBar = false
+                            null
+                        }
+                    }
                     val hazeStyle = if (enableBlur && hazeState != null) {
                         HazeStyle(
                             backgroundColor = MiuixTheme.colorScheme.surface,
@@ -408,13 +414,21 @@ class MainActivity : AppCompatActivity() {
                         HazeStyle.Unspecified
                     }
 
-                    val backdrop = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    val backdrop = if (enableFloatingBottomBar && hazeState != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                         val surfaceColorState = rememberUpdatedState(MiuixTheme.colorScheme.surface)
                         rememberLayerBackdrop {
                             drawRect(surfaceColorState.value)
                             drawContent()
                         }
                     } else null
+
+                    LaunchedEffect(enableBlur, enableFloatingBottomBar, enableLiquidGlass) {
+                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
+                            if (enableBlur) VisualConfig.enableBlur = false
+                            if (enableFloatingBottomBar) VisualConfig.enableFloatingBottomBar = false
+                            if (enableLiquidGlass) VisualConfig.enableLiquidGlass = false
+                        }
+                    }
 
                     Scaffold(
                         containerColor = MiuixTheme.colorScheme.surface,
