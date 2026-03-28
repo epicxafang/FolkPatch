@@ -352,4 +352,7 @@
     <string name="settings_theme_mode_monet_system">Monet (Theo hệ thống)</string>
     <string name="settings_theme_mode_monet_light">Monet (Sáng)</string>
     <string name="settings_theme_mode_monet_dark">Monet (Tối)</string>
+
+    <string name="settings_predictive_back_gesture">Cử chỉ quay lại dự đoán</string>
+    <string name="settings_predictive_back_gesture_summary">Bật hoạt animation cử chỉ quay lại dự đoán Android 14+</string>
 </resources>

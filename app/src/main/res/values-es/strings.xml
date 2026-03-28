@@ -351,4 +351,7 @@
     <string name="settings_theme_mode_monet_system">Monet (Seguir al sistema)</string>
     <string name="settings_theme_mode_monet_light">Monet (Claro)</string>
     <string name="settings_theme_mode_monet_dark">Monet (Oscuro)</string>
+
+    <string name="settings_predictive_back_gesture">Gestos de retroceso predictivo</string>
+    <string name="settings_predictive_back_gesture_summary">Activar la animación de gestos de retroceso predictivo de Android 14+</string>
 </resources>

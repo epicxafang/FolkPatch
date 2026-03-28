@@ -9,6 +9,7 @@ object VisualConfig {
     private const val KEY_ENABLE_FLOATING_BOTTOM_BAR = "enable_floating_bottom_bar"
     private const val KEY_ENABLE_LIQUID_GLASS = "enable_liquid_glass"
     private const val KEY_KEY_COLOR = "key_color"
+    private const val KEY_PREDICTIVE_BACK_GESTURE = "predictive_back_gesture"
 
     private val prefs get() = APApplication.sharedPreferences
 
@@ -35,10 +36,13 @@ object VisualConfig {
     var enableLiquidGlass: Boolean
         get() = prefs.getBoolean(KEY_ENABLE_LIQUID_GLASS, false)
         set(value) {
-            // When liquid glass is enabled, auto-enable blur
             if (value && !enableBlur) {
                 enableBlur = true
             }
             prefs.edit { putBoolean(KEY_ENABLE_LIQUID_GLASS, value) }
         }
+
+    var predictiveBackGesture: Boolean
+        get() = prefs.getBoolean(KEY_PREDICTIVE_BACK_GESTURE, true)
+        set(value) = prefs.edit { putBoolean(KEY_PREDICTIVE_BACK_GESTURE, value) }
 }

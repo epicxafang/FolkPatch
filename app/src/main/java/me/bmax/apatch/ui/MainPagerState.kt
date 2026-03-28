@@ -1,6 +1,5 @@
 package me.bmax.apatch.ui
 
-import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.EaseInOut
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.gestures.animateScrollBy
@@ -30,8 +29,21 @@ class MainPagerState(
 
     private var navJob: Job? = null
 
+    private val pageBackStack = ArrayDeque<Int>()
+
     fun animateToPage(targetIndex: Int) {
         if (targetIndex == selectedPage) return
+        pageBackStack.addLast(selectedPage)
+        doAnimateToPage(targetIndex)
+    }
+
+    fun navigateBack(): Boolean {
+        val prevPage = pageBackStack.removeLastOrNull() ?: return false
+        doAnimateToPage(prevPage)
+        return true
+    }
+
+    private fun doAnimateToPage(targetIndex: Int) {
         navJob?.cancel()
         selectedPage = targetIndex
         isNavigating = true

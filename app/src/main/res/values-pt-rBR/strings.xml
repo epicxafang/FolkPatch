@@ -352,4 +352,7 @@
     <string name="settings_theme_mode_monet_system">Monet (Seguir o sistema)</string>
     <string name="settings_theme_mode_monet_light">Monet (Claro)</string>
     <string name="settings_theme_mode_monet_dark">Monet (Escuro)</string>
+
+    <string name="settings_predictive_back_gesture">Gesture de retorno preditivo</string>
+    <string name="settings_predictive_back_gesture_summary">Ativar animação de gesture de retorno preditivo do Android 14+</string>
 </resources>

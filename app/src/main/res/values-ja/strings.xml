@@ -360,4 +360,7 @@
     <string name="send_log_summary">バグレポートをエクスポートまたは共有</string>
 
     <string name="settings_section_about">Logs</string>
+
+    <string name="settings_predictive_back_gesture">予測バックジェスチャ</string>
+    <string name="settings_predictive_back_gesture_summary">Android 14+の予測バックジェスチャアニメーションを有効化</string>
 </resources>

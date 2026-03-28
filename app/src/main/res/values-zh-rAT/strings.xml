@@ -385,4 +385,7 @@
     <string name="settings_theme_mode_monet_system">Monet（跟隨系統）</string>
     <string name="settings_theme_mode_monet_light">Monet（淺色）</string>
     <string name="settings_theme_mode_monet_dark">Monet（深色）</string>
+
+    <string name="settings_predictive_back_gesture">預測性返回手勢</string>
+    <string name="settings_predictive_back_gesture_summary">啟用 Android 14+ 預測性返回手勢動畫</string>
 </resources>

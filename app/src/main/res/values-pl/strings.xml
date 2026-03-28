@@ -350,4 +350,7 @@
     <string name="settings_theme_mode_monet_system">Monet (Zgodny z systemem)</string>
     <string name="settings_theme_mode_monet_light">Monet (Jasny)</string>
     <string name="settings_theme_mode_monet_dark">Monet (Ciemny)</string>
+
+    <string name="settings_predictive_back_gesture">Predykcyjny gest cofania</string>
+    <string name="settings_predictive_back_gesture_summary">Włącz animację predykcyjnego gestu cofania w Android 14+</string>
 </resources>

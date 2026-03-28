@@ -350,4 +350,7 @@
     <string name="settings_theme_mode_monet_system">Monet (Ikuti sistem)</string>
     <string name="settings_theme_mode_monet_light">Monet (Terang)</string>
     <string name="settings_theme_mode_monet_dark">Monet (Gelap)</string>
+
+    <string name="settings_predictive_back_gesture">Gestur balik prediktif</string>
+    <string name="settings_predictive_back_gesture_summary">Aktifkan animasi gestur balik prediktif Android 14+</string>
 </resources>

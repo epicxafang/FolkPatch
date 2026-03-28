@@ -350,4 +350,7 @@
     <string name="settings_theme_mode_monet_system">Monet (تبع النظام)</string>
     <string name="settings_theme_mode_monet_light">Monet (فاتح)</string>
     <string name="settings_theme_mode_monet_dark">Monet (داكن)</string>
+
+    <string name="settings_predictive_back_gesture">إيماءة العودة التنبؤية</string>
+    <string name="settings_predictive_back_gesture_summary">تفعيل الرسوم المتحركة لإيماءة العودة التنبؤية في Android 14+</string>
 </resources>

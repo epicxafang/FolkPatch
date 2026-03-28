@@ -452,6 +452,9 @@ dependencies {
     // Backdrop (liquid glass)
     implementation(libs.backdrop)
 
+    // Hidden API Bypass (predictive back gesture runtime toggle)
+    implementation(libs.org.lsposed.hiddenapibypass)
+
     compileOnly(libs.cxx)
 }
 

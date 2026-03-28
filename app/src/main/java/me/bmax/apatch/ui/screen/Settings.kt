@@ -2,6 +2,7 @@ package me.bmax.apatch.ui.screen
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ApplicationInfo
 import android.net.Uri
 import android.os.Build
 import android.widget.Toast
@@ -35,9 +36,10 @@ import androidx.compose.material.icons.rounded.HideImage
 import androidx.compose.material.icons.rounded.Language
 import androidx.compose.material.icons.rounded.Lock
 import androidx.compose.material.icons.rounded.Menu
-import androidx.compose.material.icons.automirrored.rounded.OpenInNew
 import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.material.icons.rounded.Restore
+import androidx.compose.material.icons.rounded.Adb
+import androidx.compose.material.icons.automirrored.rounded.OpenInNew
 import androidx.compose.material.icons.automirrored.rounded.Send
 import androidx.compose.material.icons.automirrored.rounded.Sort
 import androidx.compose.material.icons.rounded.SwapHoriz
@@ -489,6 +491,34 @@ fun SettingScreen(navigator: DestinationsNavigator) {
                             }
                         }
                     )
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                        var predictiveBackEnabled by rememberSaveable {
+                            mutableStateOf(VisualConfig.predictiveBackGesture)
+                        }
+                        val activity = LocalContext.current as? android.app.Activity
+                        SuperSwitch(
+                            title = stringResource(id = R.string.settings_predictive_back_gesture),
+                            summary = stringResource(id = R.string.settings_predictive_back_gesture_summary),
+                            checked = predictiveBackEnabled,
+                            startAction = {
+                                Icon(
+                                    Icons.Rounded.Adb,
+                                    null,
+                                    modifier = Modifier.padding(end = 6.dp)
+                                )
+                            },
+                            onCheckedChange = { newValue ->
+                                VisualConfig.predictiveBackGesture = newValue
+                                predictiveBackEnabled = newValue
+                                APApplication.applyPredictiveBackConfig(
+                                    activity?.applicationInfo ?: return@SuperSwitch,
+                                    newValue
+                                )
+                                activity?.recreate()
+                            }
+                        )
+                    }
 
                     var useAltIcon by rememberSaveable {
                         mutableStateOf(prefs.getBoolean("use_alt_icon", false))

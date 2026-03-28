@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.ApplicationInfo
 import android.os.Build
 import android.util.Log
 import android.widget.Toast
@@ -19,11 +20,13 @@ import me.bmax.apatch.util.APatchCli
 import me.bmax.apatch.util.APatchKeyHelper
 import me.bmax.apatch.util.LauncherIconUtils
 import me.bmax.apatch.util.Version
+import me.bmax.apatch.util.VisualConfig
 import me.bmax.apatch.util.getRootShell
 import me.bmax.apatch.util.rootShellForResult
 import me.bmax.apatch.util.verifyAppSignature
 import okhttp3.Cache
 import okhttp3.OkHttpClient
+import org.lsposed.hiddenapibypass.HiddenApiBypass
 import java.io.File
 import java.util.Locale
 import kotlin.concurrent.thread
@@ -52,7 +55,7 @@ class APApplication : Application(), Thread.UncaughtExceptionHandler {
     companion object {
         const val APD_PATH = "/data/adb/apd"
 
-        @Deprecated("No more KPatch ELF from 0.11.0-dev")
+        @Suppress("DEPRECATION")
         const val KPATCH_PATH = "/data/adb/kpatch"
         const val SUPERCMD = "/system/bin/truncate"
         const val APATCH_FOLDER = "/data/adb/ap/"
@@ -87,6 +90,22 @@ class APApplication : Application(), Thread.UncaughtExceptionHandler {
         private const val SHOW_BACKUP_WARN = "show_backup_warning"
         lateinit var sharedPreferences: SharedPreferences
         var isSignatureValid = true
+
+        fun applyPredictiveBackConfig(appInfo: ApplicationInfo, enable: Boolean) {
+            runCatching {
+                HiddenApiBypass.addHiddenApiExemptions(
+                    "Landroid/content/pm/ApplicationInfo;->setEnableOnBackInvokedCallback"
+                )
+                val method = ApplicationInfo::class.java.getDeclaredMethod(
+                    "setEnableOnBackInvokedCallback",
+                    Boolean::class.javaPrimitiveType
+                )
+                method.isAccessible = true
+                method.invoke(appInfo, enable)
+            }.onFailure {
+                Log.w(TAG, "applyPredictiveBackConfig failed: ${it.message}")
+            }
+        }
 
         private val logCallback: CallbackList<String?> = object : CallbackList<String?>() {
             override fun onAddElement(s: String?) {
@@ -295,6 +314,10 @@ class APApplication : Application(), Thread.UncaughtExceptionHandler {
         sharedPreferences = getSharedPreferences(SP_NAME, Context.MODE_PRIVATE)
         APatchKeyHelper.setSharedPreferences(sharedPreferences)
         superKey = APatchKeyHelper.readSPSuperKey()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            applyPredictiveBackConfig(applicationInfo, VisualConfig.predictiveBackGesture)
+        }
 
         okhttpClient =
             OkHttpClient.Builder().cache(Cache(File(cacheDir, "okhttp"), 10 * 1024 * 1024))

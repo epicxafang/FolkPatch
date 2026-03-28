@@ -1,5 +1,6 @@
 package me.bmax.apatch.ui.screen
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.runtime.Composable
@@ -12,6 +13,7 @@ import com.ramcosta.composedestinations.annotation.RootGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import me.bmax.apatch.APApplication
 import me.bmax.apatch.ui.theme.LocalMainPagerState
+import me.bmax.apatch.util.VisualConfig
 
 @Destination<RootGraph>(start = true)
 @Composable
@@ -20,6 +22,11 @@ fun MainScreen(navigator: DestinationsNavigator) {
 
     LaunchedEffect(mainPagerState.pagerState.currentPage) {
         mainPagerState.syncPage()
+    }
+
+    val hasBackStack = mainPagerState.pagerState.currentPage > 0
+    BackHandler(enabled = hasBackStack && VisualConfig.predictiveBackGesture) {
+        mainPagerState.navigateBack()
     }
 
     HorizontalPager(

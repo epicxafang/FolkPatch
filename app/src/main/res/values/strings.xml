@@ -406,4 +406,7 @@
     <string name="clear_super_key_summary">Remove stored SuperKey credential</string>
     <string name="setting_reset_su_path_summary">Reset su executable path</string>
     <string name="send_log_summary">Export or share bug reports</string>
+
+    <string name="settings_predictive_back_gesture">Predictive back gesture</string>
+    <string name="settings_predictive_back_gesture_summary">Enable Android 14+ predictive back gesture animation</string>
 </resources>

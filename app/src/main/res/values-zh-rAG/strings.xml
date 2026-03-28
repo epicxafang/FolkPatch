@@ -333,4 +333,7 @@
     <string name="settings_section_customization">自定义</string>
     <string name="settings_section_app">应用</string>
     <string name="settings_section_about">日志</string>
+
+    <string name="settings_predictive_back_gesture">预测性返回手势喵</string>
+    <string name="settings_predictive_back_gesture_summary">启用 Android 14+ 预测性返回手势动画喵~</string>
 </resources>

@@ -385,4 +385,7 @@
     <string name="settings_theme_mode_monet_system">Monet (Системд дагах)</string>
     <string name="settings_theme_mode_monet_light">Monet (Гэгээн)</string>
     <string name="settings_theme_mode_monet_dark">Monet (Харанхуй)</string>
+
+    <string name="settings_predictive_back_gesture">Өмнөх татах чимээ</string>
+    <string name="settings_predictive_back_gesture_summary">Android 14+ өмнөх татах чимээний анимацийг идэвхжүүлэх</string>
 </resources>
