@@ -394,10 +394,7 @@ class MainActivity : AppCompatActivity() {
 
                     Box(modifier = Modifier.fillMaxSize()) {
                         Scaffold(
-                            containerColor = if (enableBlur && showBottomBar && !enableFloatingBottomBar)
-                                Color.Transparent
-                            else
-                                MiuixTheme.colorScheme.surface,
+                            containerColor = MiuixTheme.colorScheme.surface,
                             bottomBar = {
                                 if (showBottomBar && !enableFloatingBottomBar) {
                                     BottomBar(
