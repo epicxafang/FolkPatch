@@ -47,23 +47,23 @@ fun APatchTheme(
 ) {
     val isDark = isSystemInDarkTheme()
     val controller = when (colorMode) {
-        0 -> ThemeController(
+        0 -> ThemeController(ColorSchemeMode.System)
+        1 -> ThemeController(ColorSchemeMode.Light)
+        2 -> ThemeController(ColorSchemeMode.Dark)
+        3 -> ThemeController(
             ColorSchemeMode.MonetSystem,
             keyColor = keyColor,
             isDark = isDark
         )
-        1 -> ThemeController(
+        4 -> ThemeController(
             ColorSchemeMode.MonetLight,
             keyColor = keyColor,
         )
-        2 -> ThemeController(
+        5 -> ThemeController(
             ColorSchemeMode.MonetDark,
             keyColor = keyColor,
         )
-        3 -> ThemeController(ColorSchemeMode.System)
-        4 -> ThemeController(ColorSchemeMode.Light)
-        5 -> ThemeController(ColorSchemeMode.Dark)
-        else -> ThemeController(ColorSchemeMode.MonetSystem)
+        else -> ThemeController(ColorSchemeMode.System)
     }
     return MiuixTheme(
         controller = controller,
@@ -78,8 +78,8 @@ fun APatchTheme(
 @ReadOnlyComposable
 fun isInDarkTheme(themeMode: Int): Boolean {
     return when (themeMode) {
-        1, 4 -> false  // MonetLight, Light
-        2, 5 -> true   // MonetDark, Dark
-        else -> isSystemInDarkTheme()  // MonetSystem (0) or System (3)
+        1, 4 -> false  // Light, MonetLight
+        2, 5 -> true   // Dark, MonetDark
+        else -> isSystemInDarkTheme()  // System (0) or MonetSystem (3)
     }
 }
