@@ -9,6 +9,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -395,7 +396,7 @@ fun MultimediaSettings(
                             color = MaterialTheme.colorScheme.outline
                         )
                     },
-                    leadingContent = { Icon(Icons.Filled.List, null) },
+                    leadingContent = { Icon(Icons.AutoMirrored.Filled.List, null) },
                     modifier = Modifier.clickable { showSourceDialog = true }
                 )
                 
@@ -759,7 +760,7 @@ fun MultimediaSettings(
                             color = MaterialTheme.colorScheme.outline
                         )
                     },
-                    leadingContent = { Icon(Icons.Filled.List, null) },
+                    leadingContent = { Icon(Icons.AutoMirrored.Filled.List, null) },
                     modifier = Modifier.clickable { showSourceDialog = true }
                 )
                 

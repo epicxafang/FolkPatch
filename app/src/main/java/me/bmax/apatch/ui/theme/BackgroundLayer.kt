@@ -22,6 +22,7 @@ import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import me.bmax.apatch.APApplication
@@ -264,6 +265,7 @@ private fun RenderBackgroundImage(rawTargetUri: String?, isDarkTheme: Boolean) {
 /**
  * 扩展函数，用于保存自定义背景
  */
+@OptIn(DelicateCoroutinesApi::class)
 fun Context.saveCustomBackground(uri: Uri?) {
     if (uri != null) {
         // 使用IO调度器在后台线程中处理

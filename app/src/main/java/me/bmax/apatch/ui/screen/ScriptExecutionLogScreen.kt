@@ -80,7 +80,6 @@ fun ScriptExecutionLogScreen(
             try {
                 // Try to start root shell with multiple strategies
                 
-                // Strategy 1: APatch specific truncate
                 if (p == null) {
                     try {
                         val pb = ProcessBuilder(
@@ -90,16 +89,52 @@ fun ScriptExecutionLogScreen(
                             APApplication.MAGISK_SCONTEXT
                         )
                         pb.redirectErrorStream(true)
-                        val env = pb.environment()
-                        env?.set("PATH", System.getenv("PATH") + ":/system_ext/bin:/vendor/bin:${APApplication.APATCH_FOLDER}bin")
-                        env?.set("BUSYBOX", "${APApplication.APATCH_FOLDER}bin/busybox")
+                        pb.environment()?.apply {
+                            set("PATH", System.getenv("PATH") ?: "" + ":/system_ext/bin:/vendor/bin:${APApplication.APATCH_FOLDER}bin")
+                            set("BUSYBOX", "${APApplication.APATCH_FOLDER}bin/busybox")
+                        }
                         p = pb.start()
                     } catch (e: Exception) {
                         // Continue
                     }
                 }
 
-                // Strategy 2: Compat KPatch
+                if (p == null) {
+                    try {
+                        val pb = ProcessBuilder(
+                            APApplication.SUPERCMD,
+                            APApplication.superKey,
+                            "su",
+                            "-Z",
+                            APApplication.MAGISK_SCONTEXT
+                        )
+                        pb.redirectErrorStream(true)
+                        pb.environment()?.apply {
+                            set("PATH", System.getenv("PATH") ?: "" + ":/system_ext/bin:/vendor/bin:${APApplication.APATCH_FOLDER}bin")
+                            set("BUSYBOX", "${APApplication.APATCH_FOLDER}bin/busybox")
+                        }
+                        p = pb.start()
+                    } catch (e: Exception) {
+                        // Continue
+                    }
+                }
+
+              
+                if (p == null) {
+                    try {
+                        val pb = ProcessBuilder("su")
+                        pb.redirectErrorStream(true)
+                        pb.environment()?.apply {
+                            set("PATH", System.getenv("PATH") ?: "" + ":/system_ext/bin:/vendor/bin:${APApplication.APATCH_FOLDER}bin")
+                            set("BUSYBOX", "${APApplication.APATCH_FOLDER}bin/busybox")
+                        }
+                        p = pb.start()
+                    } catch (e: Exception) {
+                        // Continue
+                    }
+                }
+
+              
                 if (p == null) {
                     try {
                         val kpatchPath = apApp.applicationInfo.nativeLibraryDir + File.separator + "libkpatch.so"
@@ -112,7 +147,7 @@ fun ScriptExecutionLogScreen(
                         )
                         pb.redirectErrorStream(true)
                         val env = pb.environment()
-                        env?.set("PATH", System.getenv("PATH") + ":/system_ext/bin:/vendor/bin:${APApplication.APATCH_FOLDER}bin")
+                        env?.set("PATH", System.getenv("PATH") ?: "" + ":/system_ext/bin:/vendor/bin:${APApplication.APATCH_FOLDER}bin")
                         env?.set("BUSYBOX", "${APApplication.APATCH_FOLDER}bin/busybox")
                         p = pb.start()
                     } catch (e: Exception) {
@@ -120,13 +155,13 @@ fun ScriptExecutionLogScreen(
                     }
                 }
 
-                // Strategy 3: Standard su
+               
                 if (p == null) {
                     try {
                         val pb = ProcessBuilder("su")
                         pb.redirectErrorStream(true)
                         val env = pb.environment()
-                        env?.set("PATH", System.getenv("PATH") + ":/system_ext/bin:/vendor/bin:${APApplication.APATCH_FOLDER}bin")
+                        env?.set("PATH", System.getenv("PATH") ?: "" + ":/system_ext/bin:/vendor/bin:${APApplication.APATCH_FOLDER}bin")
                         env?.set("BUSYBOX", "${APApplication.APATCH_FOLDER}bin/busybox")
                         p = pb.start()
                     } catch (e: Exception) {

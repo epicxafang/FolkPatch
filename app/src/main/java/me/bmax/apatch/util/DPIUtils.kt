@@ -40,6 +40,7 @@ object DPIUtils {
             metrics.densityDpi = currentDpi
             // This is a deprecated way but effective for overriding per-activity context config
             // For newer android versions, attachBaseContext wrapper is preferred.
+            @Suppress("DEPRECATION")
             res.updateConfiguration(config, metrics)
         }
     }

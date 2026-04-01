@@ -497,11 +497,11 @@ object ThemeManager {
                 val musicVolume = json.optDouble("musicVolume", 1.0).toFloat()
                 val isAutoPlayEnabled = json.optBoolean("isAutoPlayEnabled", false)
                 val isLoopingEnabled = json.optBoolean("isLoopingEnabled", false)
-                val musicFilename = json.optString("musicFilename", null)
+                val musicFilename = json.optString("musicFilename", "")
 
                 // Sound Effect Config
                 val isSoundEffectEnabled = json.optBoolean("isSoundEffectEnabled", false)
-                val soundEffectFilename = json.optString("soundEffectFilename", null)
+                val soundEffectFilename = json.optString("soundEffectFilename", "")
                 val soundEffectScope = json.optString("soundEffectScope", SoundEffectConfig.SCOPE_GLOBAL)
 
                 // 3. Apply Background
@@ -706,7 +706,7 @@ object ThemeManager {
                 MusicConfig.setAutoPlayEnabledState(isAutoPlayEnabled)
                 MusicConfig.setLoopingEnabledState(isLoopingEnabled)
 
-                if (isMusicEnabled && musicFilename != null && musicFilename != "null") {
+                if (isMusicEnabled && musicFilename.isNotEmpty() && musicFilename != "null") {
                     val musicFile = File(cacheDir, musicFilename)
                     if (musicFile.exists()) {
                          val destFile = File(MusicConfig.getMusicDir(context), musicFilename)
@@ -728,7 +728,7 @@ object ThemeManager {
                 SoundEffectConfig.setEnabledState(isSoundEffectEnabled)
                 SoundEffectConfig.setScopeValue(soundEffectScope)
                 
-                if (isSoundEffectEnabled && soundEffectFilename != null && soundEffectFilename != "null") {
+                if (isSoundEffectEnabled && soundEffectFilename.isNotEmpty() && soundEffectFilename != "null") {
                     val soundEffectFile = File(cacheDir, soundEffectFilename)
                     if (soundEffectFile.exists()) {
                         val destFile = File(SoundEffectConfig.getSoundEffectDir(context), soundEffectFilename)

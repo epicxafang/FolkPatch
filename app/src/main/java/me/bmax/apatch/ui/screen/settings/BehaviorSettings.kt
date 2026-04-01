@@ -258,6 +258,7 @@ fun BehaviorSettings(
             // Use Legacy SU Page
             if (showUseLegacySuPage) {
                 var useLegacySuPage by remember { mutableStateOf(prefs.getBoolean("use_legacy_su_page", false)) }
+                @Suppress("DEPRECATION")
                 SwitchItem(
                     icon = Icons.Filled.ViewList,
                     title = useLegacySuPageTitle,
