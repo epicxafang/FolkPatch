@@ -324,6 +324,10 @@
     <string name="restore_select_file">选择一个要恢复原味的分区引导文件</string>
     <string name="mode_select_page_install_inactive_slot">烹饪到备用灶台 (OTA 后)</string>
     <string name="mode_select_page_install_inactive_slot_warning">您的设备将在重新开火后**强制**启动到当前未激活的灶台！\n仅在 OTA 完成后使用此烹饪选项。\n继续烹饪吗？</string>
+    <string name="mode_select_page_select_kpimg">使用本地秘方补丁 (KPimg)</string>
+    <string name="patch_custom_kpimg_label">自定义 KPimg</string>
+    <string name="patch_custom_kpimg_file">文件: %s</string>
+    <string name="patch_select_kpimg_btn">选择 KPimg</string>
 
     <string name="home_dialog_auth_fail_title">验证失败</string>
     <string name="home_dialog_auth_fail_content">无法验证传世秘方，导致 FolkPatch 激活失败。
@@ -870,7 +874,7 @@
     <string name="search_scripts">搜索后厨秘籍...</string>
 
     <!-- Umount Service -->
-    <string name="settings_umount_service">Zig Umount</string>
+    <string name="settings_umount_service">Umount Service</string>
     <string name="settings_umount_service_summary">配置开炉自动撤回的摆盘位置</string>
     <string name="umount_config_title">Umount 食谱</string>
     <string name="umount_config_enabled">启用 Umount</string>

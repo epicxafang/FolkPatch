@@ -329,6 +329,10 @@
     <string name="restore_select_file">Select a partition boot file to restore</string>
     <string name="mode_select_page_install_inactive_slot">Install to inactive slot (After OTA)</string>
     <string name="mode_select_page_install_inactive_slot_warning">Your device will be **FORCED** to boot to the current inactive slot after a reboot!\nOnly use this option after OTA is done.\nContinue?</string>
+    <string name="mode_select_page_select_kpimg">Use local patch file (KPimg)</string>
+    <string name="patch_custom_kpimg_label">Custom KPimg</string>
+    <string name="patch_custom_kpimg_file">File: %s</string>
+    <string name="patch_select_kpimg_btn">Select KPimg</string>
 
     <string name="home_dialog_auth_fail_title">Authentication failed</string>
     <string name="home_dialog_auth_fail_content">Unable to authenticate the SuperKey, causing FolkPatch activation to fail.
@@ -442,7 +446,7 @@ Here are some possible reasons for authentication failure—please check which o
     <string name="settings_hide_service">FolkPatch Hide</string>
     <string name="settings_hide_service_summary">Hide Bootloader unlock status to some extent</string>
     <!-- Umount Service -->
-    <string name="settings_umount_service">Zig Umount</string>
+    <string name="settings_umount_service">Umount Service</string>
     <string name="settings_umount_service_summary">Configure mount points to auto-unmount at boot</string>
     <string name="umount_config_title">Umount Configuration</string>
     <string name="umount_config_enabled">Enable Umount</string>

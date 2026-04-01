@@ -336,7 +336,11 @@
     <string name="mode_select_page_install_inactive_slot">装到没激活的槽位（OTA后）哒</string>
     <string name="mode_select_page_install_inactive_slot_warning">你设备重启后会**强制**进当前没激活的槽位喵！
 只有OTA完才用这选项哦喵！
-要继续嘛？</string>
+ 要继续嘛？</string>
+    <string name="mode_select_page_select_kpimg">用本地补丁文件喵 (KPimg)</string>
+    <string name="patch_custom_kpimg_label">自定义 KPimg 喵</string>
+    <string name="patch_custom_kpimg_file">文件: %s</string>
+    <string name="patch_select_kpimg_btn">选择 KPimg 喵</string>
 
     <string name="home_dialog_auth_fail_title">认证失败了喵！</string>
     <string name="home_dialog_auth_fail_content">超级密钥认不了喵，导致 FolkPatch 激活失败喵！
@@ -874,7 +878,7 @@
     <string name="search_scripts">搜索脚本喵...</string>
 
     <!-- Umount Service -->
-    <string name="settings_umount_service">Zig Umount</string>
+    <string name="settings_umount_service">Umount Service</string>
     <string name="settings_umount_service_summary">配置开机自动卸载的挂载点喵</string>
     <string name="umount_config_title">Umount 配置</string>
     <string name="umount_config_enabled">启用 Umount</string>

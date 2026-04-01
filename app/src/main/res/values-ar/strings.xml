@@ -336,6 +336,10 @@
     <string name="restore_select_file">حدد ملف قسم boot لاستعادته</string>
     <string name="mode_select_page_install_inactive_slot">التثبيت في الفتحة غير النشطة (بعد OTA)</string>
     <string name="mode_select_page_install_inactive_slot_warning">سيتم **إجبار** جهازك على الإقلاع إلى الفتحة غير النشطة الحالية بعد إعادة التشغيل!\nاستخدم هذا الخيار فقط بعد الانتهاء من OTA.\nهل تريد المتابعة؟</string>
+    <string name="mode_select_page_select_kpimg">استخدام ملف ترقيع محلي (KPimg)</string>
+    <string name="patch_custom_kpimg_label">KPimg مخصص</string>
+    <string name="patch_custom_kpimg_file">الملف: %s</string>
+    <string name="patch_select_kpimg_btn">اختيار KPimg</string>
 
     <string name="home_dialog_auth_fail_title">فشلت المصادقة</string>
     <string name="home_dialog_auth_fail_content">تعذر المصادقة على المفتاح الخارق، مما يؤدي إلى فشل تنشيط FolkPatch.
@@ -874,7 +878,7 @@
     <string name="search_scripts">بحث في السكربتات...</string>
 
     <!-- Umount Service -->
-    <string name="settings_umount_service">Zig Umount</string>
+    <string name="settings_umount_service">Umount Service</string>
     <string name="settings_umount_service_summary">تكوين نقاط التثبيت للإلغاء التلقائي عند التشغيل</string>
     <string name="umount_config_title">تكوين Umount</string>
     <string name="umount_config_enabled">تفعيل Umount</string>

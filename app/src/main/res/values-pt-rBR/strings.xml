@@ -335,6 +335,10 @@
     <string name="restore_select_file">Selecione um arquivo de boot para restaurar na partição</string>
     <string name="mode_select_page_install_inactive_slot">Instalar no slot inativo (Após OTA)</string>
     <string name="mode_select_page_install_inactive_slot_warning">Seu dispositivo será **FORÇADO** a inicializar no slot inativo atual após reiniciar!\nUse esta opção apenas após o término da OTA.\nContinuar?</string>
+    <string name="mode_select_page_select_kpimg">Usar arquivo de patch local (KPimg)</string>
+    <string name="patch_custom_kpimg_label">KPimg personalizado</string>
+    <string name="patch_custom_kpimg_file">Arquivo: %s</string>
+    <string name="patch_select_kpimg_btn">Selecionar KPimg</string>
 
     <string name="home_dialog_auth_fail_title">Falha na autenticação</string>
     <string name="home_dialog_auth_fail_content">Não foi possível autenticar a SuperKey, causando falha na ativação do FolkPatch.
@@ -887,7 +891,7 @@ Por favor, certifique-se de fechar completamente o app e reabri-lo para que os c
     <string name="search_scripts">Buscar scripts...</string>
 
     <!-- Umount Service -->
-    <string name="settings_umount_service">Zig Umount</string>
+    <string name="settings_umount_service">Umount Service</string>
     <string name="settings_umount_service_summary">Configurar pontos de montagem para desmontar automaticamente na inicialização</string>
     <string name="umount_config_title">Configuração do Umount</string>
     <string name="umount_config_enabled">Ativar Umount</string>

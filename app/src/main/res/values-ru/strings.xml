@@ -329,6 +329,10 @@
     <string name="mode_select_page_select_file">Выберите образ boot для патча</string>
     <string name="mode_select_page_install_inactive_slot">Установить в неактивный слот (После OTA)</string>
     <string name="mode_select_page_install_inactive_slot_warning">Ваше устройство будет **ПРИНУДИТЕЛЬНО** загружено в текущий неактивный слот после перезагрузки!\nИспользуйте эту опцию только после завершения OTA.\nПродолжить?</string>
+    <string name="mode_select_page_select_kpimg">Использовать локальный файл патча (KPimg)</string>
+    <string name="patch_custom_kpimg_label">Пользовательский KPimg</string>
+    <string name="patch_custom_kpimg_file">Файл: %s</string>
+    <string name="patch_select_kpimg_btn">Выбрать KPimg</string>
 
     <string name="home_dialog_auth_fail_title">Ошибка аутентификации</string>
     <string name="home_dialog_auth_fail_content">Не удалось аутентифицировать SuperKey, что привело к сбою активации FolkPatch.
@@ -886,7 +890,7 @@
     <string name="search_scripts">Поиск скриптов...</string>
 
     <!-- Umount Service -->
-    <string name="settings_umount_service">Zig Umount</string>
+    <string name="settings_umount_service">Umount Service</string>
     <string name="settings_umount_service_summary">Настройка точек монтирования для автоматического отключения при загрузке</string>
     <string name="umount_config_title">Настройка Umount</string>
     <string name="umount_config_enabled">Включить Umount</string>

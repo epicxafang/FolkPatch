@@ -325,6 +325,10 @@
     <string name="mode_select_page_select_file">选择要附魔的魔法容器</string>
     <string name="mode_select_page_install_inactive_slot">契约到备用星之容器 (OTA仪式后)</string>
     <string name="mode_select_page_install_inactive_slot_warning">你的魔法道具将在重新觉醒后**强制**启动到当前未激活的星之位置！\n仅在OTA仪式完成后使用此选项。\n继续吗？</string>
+    <string name="mode_select_page_select_kpimg">使用本地魔法补丁 (KPimg)</string>
+    <string name="patch_custom_kpimg_label">自定义 KPimg</string>
+    <string name="patch_custom_kpimg_file">文件: %s</string>
+    <string name="patch_select_kpimg_btn">选择 KPimg</string>
 
     <string name="home_dialog_auth_fail_title">认证失败</string>
     <string name="home_dialog_auth_fail_content">无法认证心之密钥，导致 FolkPatch 激活失败。
@@ -872,7 +876,7 @@
     <string name="search_scripts">搜索魔法卷轴...</string>
 
     <!-- Umount Service -->
-    <string name="settings_umount_service">Zig Umount</string>
+    <string name="settings_umount_service">Umount Service</string>
     <string name="settings_umount_service_summary">配置仪式开始时自动解除的魔法连接点</string>
     <string name="umount_config_title">Umount 魔法阵设定</string>
     <string name="umount_config_enabled">启用 Umount</string>

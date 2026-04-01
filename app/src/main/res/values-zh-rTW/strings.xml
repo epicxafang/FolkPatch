@@ -324,7 +324,11 @@
 
 注意請僅在 OTA 後重啟設備之前使用。
 
-繼續？</string>
+ 繼續？</string>
+    <string name="mode_select_page_select_kpimg">使用本地修補檔案 (KPimg)</string>
+    <string name="patch_custom_kpimg_label">自訂 KPimg</string>
+    <string name="patch_custom_kpimg_file">檔案: %s</string>
+    <string name="patch_select_kpimg_btn">選擇 KPimg</string>
 
     <string name="home_dialog_auth_fail_title">驗證失敗</string>
     <string name="home_dialog_auth_fail_content">無法認證超級密鑰，導致 FolkPatch 激活失敗。
@@ -875,7 +879,7 @@
     <string name="search_scripts">搜尋腳本...</string>
 
     <!-- Umount Service -->
-    <string name="settings_umount_service">Zig Umount</string>
+    <string name="settings_umount_service">Umount Service</string>
     <string name="settings_umount_service_summary">配置開機自動卸載的掛載點</string>
     <string name="umount_config_title">Umount 配置</string>
     <string name="umount_config_enabled">啟用 Umount</string>

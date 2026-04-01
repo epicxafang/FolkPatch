@@ -335,6 +335,10 @@
     <string name="restore_select_file">Selecciona un archivo boot para restaurar</string>
     <string name="mode_select_page_install_inactive_slot">Instalar en ranura inactiva (Tras OTA)</string>
     <string name="mode_select_page_install_inactive_slot_warning">¡Tu dispositivo será **FORZADO** a arrancar en la ranura inactiva actual tras reiniciar!\nUsa esta opción solo después de completar la OTA.\n¿Continuar?</string>
+    <string name="mode_select_page_select_kpimg">Usar archivo de parche local (KPimg)</string>
+    <string name="patch_custom_kpimg_label">KPimg personalizado</string>
+    <string name="patch_custom_kpimg_file">Archivo: %s</string>
+    <string name="patch_select_kpimg_btn">Seleccionar KPimg</string>
 
     <string name="home_dialog_auth_fail_title">Error de autenticación</string>
     <string name="home_dialog_auth_fail_content">No se pudo autenticar la SuperKey, causando que la activación de FolkPatch falle.
@@ -889,7 +893,7 @@ Por ejemplo, los KPM que previenen la modificación de particiones solo pueden u
     <string name="search_scripts">Buscar scripts...</string>
 
     <!-- Umount Service -->
-    <string name="settings_umount_service">Zig Umount</string>
+    <string name="settings_umount_service">Umount Service</string>
     <string name="settings_umount_service_summary">Configurar puntos de montaje para desmontar automáticamente al iniciar</string>
     <string name="umount_config_title">Configuración de Umount</string>
     <string name="umount_config_enabled">Activar Umount</string>

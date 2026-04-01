@@ -329,6 +329,10 @@
     <string name="restore_select_file">복원할 Boot 파티션 파일 선택</string>
     <string name="mode_select_page_install_inactive_slot">비활성 슬롯에 설치 (OTA 이후)</string>
     <string name="mode_select_page_install_inactive_slot_warning">다시 시작한 후 기기가 현재 비활성 슬롯으로 **강제** 부팅됩니다!\nOTA가 완료된 후에만 이 옵션을 사용하세요.\n계속할까요?</string>
+    <string name="mode_select_page_select_kpimg">로컬 패치 파일 사용 (KPimg)</string>
+    <string name="patch_custom_kpimg_label">사용자 지정 KPimg</string>
+    <string name="patch_custom_kpimg_file">파일: %s</string>
+    <string name="patch_select_kpimg_btn">KPimg 선택</string>
 
     <string name="home_dialog_auth_fail_title">인증 실패</string>
     <string name="home_dialog_auth_fail_content">SuperKey를 인증할 수 없어 FolkPatch 활성화에 실패했습니다.
@@ -442,7 +446,7 @@
     <string name="settings_hide_service">FolkPatch 숨김</string>
     <string name="settings_hide_service_summary">부트로더 잠금 해제 상태를 어느 정도 숨깁니다.</string>
     <!-- Umount Service -->
-    <string name="settings_umount_service">Zig Umount</string>
+    <string name="settings_umount_service">Umount Service</string>
     <string name="settings_umount_service_summary">부팅 시 자동으로 마운트 해제할 마운트 지점을 구성합니다.</string>
     <string name="umount_config_title">Umount 구성</string>
     <string name="umount_config_enabled">Umount 활성화</string>

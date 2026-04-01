@@ -320,6 +320,10 @@
     <string name="restore_select_file">Geri yüklenecek boot bölüm dosyasını seçin</string>
     <string name="mode_select_page_install_inactive_slot">Etkin olmayan slota kur (OTA sonrası)</string>
     <string name="mode_select_page_install_inactive_slot_warning">Cihazınız yeniden başlatma sonrası mevcut etkin olmayan slottan **ZORLA** açılacaktır!\nBu seçeneği yalnızca OTA tamamlandıktan sonra kullanın.\nDevam edilsin mi?</string>
+    <string name="mode_select_page_select_kpimg">Yerel yama dosyası kullan (KPimg)</string>
+    <string name="patch_custom_kpimg_label">Özel KPimg</string>
+    <string name="patch_custom_kpimg_file">Dosya: %s</string>
+    <string name="patch_select_kpimg_btn">KPimg Seç</string>
 
     <string name="home_dialog_auth_fail_title">Kimlik doğrulama başarısız</string>
     <string name="home_dialog_auth_fail_content">SuperKey doğrulanamadı, bu da FolkPatch aktivasyonunun başarısız olmasına neden oldu.
@@ -881,7 +885,7 @@ Komutların çalışması için uygulamanın tamamen kapatılıp yeniden açıld
     <string name="search_scripts">Script ara...</string>
 
     <!-- Umount Service -->
-    <string name="settings_umount_service">Zig Umount</string>
+    <string name="settings_umount_service">Umount Service</string>
     <string name="settings_umount_service_summary">Önyükleme sırasında otomatik olarak bağlantısı kesilecek bağlama noktalarını yapılandırın</string>
     <string name="umount_config_title">Umount Yapılandırması</string>
     <string name="umount_config_enabled">Umount\'u Etkinleştir</string>

@@ -293,6 +293,10 @@
     <string name="mode_select_page_select_file">Wybierz obraz boot do załatania</string>
     <string name="mode_select_page_install_inactive_slot">Zainstaluj do nieaktywnego slotu (po aktualizacji OTA)</string>
     <string name="mode_select_page_install_inactive_slot_warning">Twoje urządzenie będzie **ZMUSZONE** do uruchomienia się w bieżącym nieaktywnym slocie po ponownym uruchomieniu!\nUżywaj tej opcji tylko po zakończeniu aktualizacji OTA.\nKontynuować?</string>
+    <string name="mode_select_page_select_kpimg">Użyj lokalnego pliku łatki (KPimg)</string>
+    <string name="patch_custom_kpimg_label">Niestandardowy KPimg</string>
+    <string name="patch_custom_kpimg_file">Plik: %s</string>
+    <string name="patch_select_kpimg_btn">Wybierz KPimg</string>
     <string name="home_dialog_auth_fail_title">Uwierzytelnianie nie powiodło się</string>
     <string name="home_dialog_auth_fail_content">Nie można uwierzytelnić SuperKey, co powoduje niepowodzenie aktywacji FolkPatch. Oto możliwe przyczyny błędu uwierzytelniania — sprawdź, która dotyczy:\n1. Nie użyto KernelPatch do spatchowania pliku boot.img albo nie jest jasne, co dokładnie zostało wykonane.\n2. Spatchowany boot.img nadal znajduje się na komputerze i nie został wgrany (flashowany) na urządzenie.\n3. SuperKey został wpisany nieprawidłowo albo zawiera nietypowe znaki (np. z innych alfabetów).\n4. Urządzenie może nie być kompatybilne z FolkPatch i KernelPatch — dalsze próby mogą nie przynieść efektu.\n5. Mogły zostać wykonane niestandardowe operacje — np. użycie modułów wykluczających nazwy pakietów, co zablokowało działanie FolkPatch.</string>
     <string name="home_more_menu_feedback_or_suggestion">Opinie bądź sugestie</string>

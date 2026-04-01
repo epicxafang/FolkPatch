@@ -148,7 +148,7 @@ object UmountConfigManager {
             val shell = getRootShell()
 
             // 确保目录存在
-            shell.newJob().add("mkdir -p /data/adb/ap/bin").exec()
+            shell.newJob().add("mkdir -p /data/adb/fp/bin").exec()
 
             // 写入临时文件
             val tempFile = File(context.cacheDir, "UmountPATH_temp")

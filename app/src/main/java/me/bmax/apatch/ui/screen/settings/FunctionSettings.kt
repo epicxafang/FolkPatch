@@ -35,7 +35,7 @@ import me.bmax.apatch.util.setHideServiceEnabled
 
 /**
  * 功能设置页面
- * 包含 FolkPatch Hide 和 Zig Umount 功能
+ * 包含 FolkPatch Hide 和 Umount Service 功能
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -84,7 +84,7 @@ fun FunctionSettings(
                 )
             }
             
-            // Zig Umount Service
+            // Umount Service Service
             if (showUmountService) {
                 ListItem(
                     colors = ListItemDefaults.colors(containerColor = Color.Transparent),

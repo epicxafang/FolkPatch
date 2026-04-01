@@ -152,6 +152,7 @@ fun Patches(mode: PatchesViewModel.PatchMode) {
             PatchMode(mode)
             ErrorView(viewModel.error)
             KernelPatchImageView(viewModel.kpimgInfo)
+            CustomKPImgView(viewModel)
 
             if ((mode == PatchesViewModel.PatchMode.PATCH_ONLY || mode == PatchesViewModel.PatchMode.RESTORE) && selectedBootImage != null && viewModel.kimgInfo.banner.isEmpty()) {
                 viewModel.copyAndParseBootimg(selectedBootImage!!)
@@ -183,6 +184,15 @@ fun Patches(mode: PatchesViewModel.PatchMode) {
 
             if (mode != PatchesViewModel.PatchMode.UNPATCH && mode != PatchesViewModel.PatchMode.RESTORE && viewModel.kimgInfo.banner.isNotEmpty()) {
                 SetSuperKeyView(viewModel)
+            }
+
+            if (viewModel.useCustomKPImg && !viewModel.patching && !viewModel.patchdone) {
+                SelectFileButton(
+                    text = stringResource(id = R.string.patch_select_kpimg_btn),
+                    onSelected = { _, uri ->
+                        viewModel.setCustomKPImg(uri)
+                    }
+                )
             }
 
             // existed extras
@@ -546,6 +556,39 @@ private fun KernelPatchImageView(kpImgInfo: KPModel.KPImgInfo) {
                 text = stringResource(id = R.string.patch_item_kpimg_config) + " " + kpImgInfo.config,
                 style = MaterialTheme.typography.bodyMedium
             )
+        }
+    }
+}
+
+@Composable
+private fun CustomKPImgView(viewModel: PatchesViewModel) {
+    if (!viewModel.useCustomKPImg) return
+    ElevatedCard(
+        colors = CardDefaults.elevatedCardColors(containerColor = run {
+            MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 1f)
+        })
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(12.dp),
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = stringResource(id = R.string.patch_custom_kpimg_label),
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
+            if (viewModel.customKPImgFileName.isNotEmpty()) {
+                Text(
+                    text = stringResource(id = R.string.patch_custom_kpimg_file, viewModel.customKPImgFileName),
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
         }
     }
 }

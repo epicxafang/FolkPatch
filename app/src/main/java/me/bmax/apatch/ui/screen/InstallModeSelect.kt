@@ -66,6 +66,7 @@ import me.bmax.apatch.util.isABDevice
 import me.bmax.apatch.util.rootAvailable
 
 var selectedBootImage: Uri? = null
+var selectedKPImg: Uri? = null
 
 @Destination<RootGraph>
 @Composable
@@ -97,6 +98,11 @@ sealed class InstallMethod {
         @param:StringRes override val label: Int = R.string.mode_select_page_select_file,
     ) : InstallMethod()
 
+    data class SelectKPImg(
+        val uri: Uri? = null,
+        @param:StringRes override val label: Int = R.string.mode_select_page_select_kpimg,
+    ) : InstallMethod()
+
     data object DirectInstall : InstallMethod() {
         override val label: Int
             get() = R.string.mode_select_page_patch_and_install
@@ -126,7 +132,7 @@ private fun SelectInstallMethod(
     val isAbDevice = isABDevice()
 
     // KP Install Options
-    val kpOptions = mutableListOf<InstallMethod>(InstallMethod.SelectFile())
+    val kpOptions = mutableListOf<InstallMethod>(InstallMethod.SelectFile(), InstallMethod.SelectKPImg())
     if (rootAvailable) {
         kpOptions.add(InstallMethod.DirectInstall)
         if (isAbDevice) {
@@ -150,6 +156,20 @@ private fun SelectInstallMethod(
                 selectedOption = option
                 onSelected(option)
                 selectedBootImage = option.uri
+            }
+        }
+    }
+
+    // Launcher for custom KPimg selection
+    val selectKPImgLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) {
+        if (it.resultCode == Activity.RESULT_OK) {
+            it.data?.data?.let { uri ->
+                val option = InstallMethod.SelectKPImg(uri)
+                selectedOption = option
+                onSelected(option)
+                selectedKPImg = option.uri
             }
         }
     }
@@ -178,9 +198,18 @@ private fun SelectInstallMethod(
     val onClick = { option: InstallMethod ->
         when (option) {
             is InstallMethod.SelectFile -> {
-                // Reset before selecting
                 selectedBootImage = null
                 selectImageLauncher.launch(
+                    Intent(Intent.ACTION_GET_CONTENT).apply {
+                        type = "application/octet-stream"
+                        addCategory(Intent.CATEGORY_OPENABLE)
+                    }
+                )
+            }
+
+            is InstallMethod.SelectKPImg -> {
+                selectedKPImg = null
+                selectKPImgLauncher.launch(
                     Intent(Intent.ACTION_GET_CONTENT).apply {
                         type = "application/octet-stream"
                         addCategory(Intent.CATEGORY_OPENABLE)
@@ -213,8 +242,12 @@ private fun SelectInstallMethod(
         selectedOption?.let { option ->
             when (option) {
                 is InstallMethod.SelectFile -> {
-                    // Logic handled in launcher result
                     if (selectedBootImage != null) {
+                         navigator.navigate(PatchesDestination(PatchesViewModel.PatchMode.PATCH_ONLY))
+                    }
+                }
+                is InstallMethod.SelectKPImg -> {
+                    if (selectedKPImg != null) {
                          navigator.navigate(PatchesDestination(PatchesViewModel.PatchMode.PATCH_ONLY))
                     }
                 }
@@ -222,7 +255,6 @@ private fun SelectInstallMethod(
                     navigator.navigate(PatchesDestination(PatchesViewModel.PatchMode.PATCH_AND_INSTALL))
                 }
                  is InstallMethod.DirectInstallToInactiveSlot -> {
-                    // Logic handled in dialog
                      navigator.navigate(PatchesDestination(PatchesViewModel.PatchMode.INSTALL_TO_NEXT_SLOT))
                 }
                 is InstallMethod.Restore -> {

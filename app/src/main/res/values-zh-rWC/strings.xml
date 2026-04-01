@@ -323,6 +323,10 @@
     <string name="mode_select_page_select_file">择待炼之仙躯镜像</string>
     <string name="mode_select_page_install_inactive_slot">引仙入未启仙槽（天道易筋后）</string>
     <string name="mode_select_page_install_inactive_slot_warning">仙器重铸后，必启于当前未启之仙槽！\n唯天道易筋既毕，可用此渡劫之选。\n道友欲继之乎？</string>
+    <string name="mode_select_page_select_kpimg">择本地仙法核心 (KPimg)</string>
+    <string name="patch_custom_kpimg_label">自定义 KPimg</string>
+    <string name="patch_custom_kpimg_file">文件: %s</string>
+    <string name="patch_select_kpimg_btn">选择 KPimg</string>
 
     <string name="home_dialog_auth_fail_title">仙籍验败</string>
     <string name="home_dialog_auth_fail_content">未验登仙秘钥，致 FolkPatch 仙法未成。
@@ -870,7 +874,7 @@
     <string name="search_scripts">搜索丹方...</string>
 
     <!-- Umount Service -->
-    <string name="settings_umount_service">Zig Umount</string>
+    <string name="settings_umount_service">Umount Service</string>
     <string name="settings_umount_service_summary">配置开炉自动撤除的灵力连接点</string>
     <string name="umount_config_title">Umount 丹方</string>
     <string name="umount_config_enabled">启用 Umount</string>
