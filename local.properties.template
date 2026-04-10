@@ -5,6 +5,12 @@
 # For customization when using a Version Control System, please read the
 # header note.
 #
-# sdk.dir=/path/to/your/android/sdk
+# ── Windows (native build) ──
+# sdk.dir=C:\\Users\\<YourName>\\AppData\\Local\\Android\\Sdk
+#
+# ── WSL (recommended) ──
+# Run: bash scripts/setup-wsl.sh
+# This will auto-generate local.properties with correct WSL paths.
+#
+sdk.dir=/home/<YourWSLUser>/Android/Sdk
 debug.fake_root=false
-
