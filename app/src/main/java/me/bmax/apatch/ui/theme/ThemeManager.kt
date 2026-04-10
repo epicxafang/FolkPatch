@@ -123,7 +123,7 @@ object ThemeManager {
                     backgroundNightDim = BackgroundConfig.customBackgroundNightDim,
                     isFontEnabled = FontConfig.isCustomFontEnabled,
                     customColor = prefs.getString("custom_color", "indigo") ?: "indigo",
-                    homeLayoutStyle = prefs.getString("home_layout_style", "circle") ?: "circle",
+                    homeLayoutStyle = prefs.getString("home_layout_style", "stats") ?: "stats",
                     nightModeEnabled = prefs.getBoolean("night_mode_enabled", true),
                     nightModeFollowSys = prefs.getBoolean("night_mode_follow_sys", false),
                     useSystemDynamicColor = prefs.getBoolean("use_system_color_theme", false),

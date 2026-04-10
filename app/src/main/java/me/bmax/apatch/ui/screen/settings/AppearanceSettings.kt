@@ -250,7 +250,7 @@ fun AppearanceSettings(
     
     // Home Layout
     val homeLayoutTitle = stringResource(id = R.string.settings_home_layout_style)
-    val currentStyle = prefs.getString("home_layout_style", "circle")
+    val currentStyle = prefs.getString("home_layout_style", "stats")
     val homeLayoutValue = stringResource(homeLayoutStyleToString(currentStyle.toString()))
     val showHomeLayout = matchLayout || shouldShow(searchText, homeLayoutTitle, homeLayoutValue)
 
@@ -1998,7 +1998,7 @@ fun HomeLayoutChooseDialog(showDialog: MutableState<Boolean>) {
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
                 
-                val currentStyle = prefs.getString("home_layout_style", "circle")
+                val currentStyle = prefs.getString("home_layout_style", "stats")
                 
                 Surface(
                     shape = RoundedCornerShape(12.dp),

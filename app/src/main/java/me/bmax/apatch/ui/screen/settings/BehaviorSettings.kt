@@ -49,12 +49,12 @@ fun BehaviorSettings(
     val stayOnPageSummary = stringResource(id = R.string.settings_apm_stay_on_page_summary)
     val showStayOnPage = aPatchReady && (matchBehavior || shouldShow(searchText, stayOnPageTitle, stayOnPageSummary))
 
-    var currentStyle by remember { mutableStateOf(prefs.getString("home_layout_style", "circle")) }
+    var currentStyle by remember { mutableStateOf(prefs.getString("home_layout_style", "stats")) }
     
     DisposableEffect(Unit) {
         val listener = android.content.SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
             if (key == "home_layout_style") {
-                currentStyle = sharedPreferences.getString("home_layout_style", "circle")
+                currentStyle = sharedPreferences.getString("home_layout_style", "stats")
             }
         }
         prefs.registerOnSharedPreferenceChangeListener(listener)

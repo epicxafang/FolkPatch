@@ -178,7 +178,7 @@ fun HomeScreen(navigator: DestinationsNavigator) {
         showPatchFloatAction = false
     }
 
-    val homeLayout = APApplication.sharedPreferences.getString("home_layout_style", "circle")
+    val homeLayout = APApplication.sharedPreferences.getString("home_layout_style", "stats")
 
     Scaffold(topBar = {
         TopBar(onInstallClick = dropUnlessResumed {
