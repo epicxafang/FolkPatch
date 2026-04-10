@@ -956,4 +956,20 @@
     <string name="script_library_log_save_failed">로그 저장 실패: %s</string>
     <string name="settings_predictive_back">예측 백 제스처</string>
     <string name="settings_predictive_back_summary">Android 14+ 예측 백 제스처 애니메이션 활성화</string>
+
+    <string name="home_device_status_battery_charging">충전 중</string>
+    <string name="home_device_status_cpu_temp">CPU 온도</string>
+    <string name="home_device_status_memory_trend">메모리 트렌드</string>
+    <string name="home_storage_partitions">저장소 파티션</string>
+    <string name="home_device_status_cpu_freq">CPU 주파수</string>
+    <string name="home_network_rx">다운로드</string>
+    <string name="home_network_tx">업로드</string>
+    <string name="settings_home_layout_stats">StatsUI</string>
+    <string name="home_stats_more_options">더보기</string>
+    <string name="home_stats_kp_label">KP</string>
+    <string name="home_stats_manager_label">관리자</string>
+    <string name="home_device_status_gpu_load">GPU</string>
+    <string name="home_stats_kernel_modules">커널 모듈</string>
+    <string name="home_stats_apm_modules">APM 모듈</string>
+    <string name="home_stats_superusers">슈퍼유저</string>
 </resources>

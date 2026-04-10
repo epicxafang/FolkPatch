@@ -38,6 +38,18 @@ object HardwareMonitor {
         val zramUsed: Long
     )
 
+    data class CpuFreqInfo(
+        val coreIndex: Int,
+        val currentFreqKhz: Long,
+        val maxFreqKhz: Long
+    )
+
+    data class StoragePartitionInfo(
+        val label: String,
+        val totalBytes: Long,
+        val usedBytes: Long
+    )
+
     /**
      * Get CPU Usage percentage (0-100) using differential /proc/stat.
      */
@@ -248,6 +260,121 @@ object HardwareMonitor {
             }
 
             MemoryInfo(ramTotal, ramUsed, swapTotal, swapUsed, zramTotal, zramUsed)
+        }
+    }
+
+    suspend fun getCpuTemperature(): Float {
+        return withContext(Dispatchers.IO) {
+            try {
+                val result = rootShellForResult(
+                    "grep -rl 'cpu' /sys/class/thermal/thermal_zone*/type 2>/dev/null | " +
+                    "sed 's|/type$|/temp|' | xargs cat 2>/dev/null | head -1"
+                )
+                if (result.isSuccess && result.out.isNotEmpty()) {
+                    val temp = result.out[0].trim().toFloatOrNull()
+                    if (temp != null) {
+                        return@withContext if (temp > 1000) temp / 1000f else temp
+                    }
+                }
+
+                val allZones = rootShellForResult("ls /sys/class/thermal/ 2>/dev/null")
+                if (allZones.isSuccess) {
+                    for (zone in allZones.out) {
+                        val zoneName = zone.trim()
+                        if (!zoneName.startsWith("thermal_zone")) continue
+                        val typeResult = rootShellForResult("cat /sys/class/thermal/$zoneName/type 2>/dev/null")
+                        if (!typeResult.isSuccess || typeResult.out.isEmpty()) continue
+                        val type = typeResult.out[0].trim().lowercase()
+                        if (!type.contains("cpu")) continue
+
+                        val tempResult = rootShellForResult("cat /sys/class/thermal/$zoneName/temp 2>/dev/null")
+                        if (tempResult.isSuccess && tempResult.out.isNotEmpty()) {
+                            val temp = tempResult.out[0].trim().toFloatOrNull()
+                            if (temp != null && temp > 0) {
+                                return@withContext if (temp > 1000) temp / 1000f else temp
+                            }
+                        }
+                    }
+                }
+
+                0f
+            } catch (e: Exception) {
+                Log.e(TAG, "Error reading CPU temperature", e)
+                0f
+            }
+        }
+    }
+
+    suspend fun getCpuFrequencies(): List<CpuFreqInfo> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val result = rootShellForResult("ls /sys/devices/system/cpu/ 2>/dev/null | grep -E '^cpu[0-9]+$'")
+                if (!result.isSuccess) return@withContext emptyList()
+
+                val infos = mutableListOf<CpuFreqInfo>()
+                for (line in result.out) {
+                    val coreName = line.trim()
+                    val match = Regex("cpu(\\d+)").find(coreName) ?: continue
+                    val coreIndex = match.groupValues[1].toIntOrNull() ?: continue
+
+                    val onlineResult = rootShellForResult("cat /sys/devices/system/cpu/$coreName/online 2>/dev/null")
+                    if (onlineResult.isSuccess && onlineResult.out.isNotEmpty()) {
+                        if (onlineResult.out[0].trim() == "0") continue
+                    }
+
+                    val curFreqResult = rootShellForResult("cat /sys/devices/system/cpu/$coreName/cpufreq/scaling_cur_freq 2>/dev/null")
+                    val maxFreqResult = rootShellForResult("cat /sys/devices/system/cpu/$coreName/cpufreq/cpuinfo_max_freq 2>/dev/null")
+
+                    val curFreq = if (curFreqResult.isSuccess && curFreqResult.out.isNotEmpty())
+                        curFreqResult.out[0].trim().toLongOrNull() ?: 0L else 0L
+                    val maxFreq = if (maxFreqResult.isSuccess && maxFreqResult.out.isNotEmpty())
+                        maxFreqResult.out[0].trim().toLongOrNull() ?: 0L else 0L
+
+                    infos.add(CpuFreqInfo(coreIndex, curFreq, maxFreq))
+                }
+
+                infos
+            } catch (e: Exception) {
+                Log.e(TAG, "Error reading CPU frequencies", e)
+                emptyList()
+            }
+        }
+    }
+
+    suspend fun getStoragePartitions(): List<StoragePartitionInfo> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val partitions = listOf(
+                    Pair("/data", "Data"),
+                    Pair("/system", "System"),
+                    Pair("/cache", "Cache"),
+                    Pair("/vendor", "Vendor"),
+                    Pair("/product", "Product")
+                )
+
+                val infos = mutableListOf<StoragePartitionInfo>()
+                for ((path, label) in partitions) {
+                    val result = rootShellForResult("df -k $path 2>/dev/null")
+                    if (result.isSuccess && result.out.size >= 2) {
+                        val dataLine = result.out.lastOrNull()?.trim() ?: continue
+                        val parts = dataLine.split(Regex("\\s+"))
+                        if (parts.size >= 5) {
+                            val totalKb = parts[1].toLongOrNull() ?: continue
+                            val usedKb = parts[2].toLongOrNull() ?: continue
+                            val totalBytes = totalKb * 1024
+                            val usedBytes = usedKb * 1024
+                            if (totalBytes > 0) {
+                                infos.add(StoragePartitionInfo(label, totalBytes, usedBytes))
+                            }
+                        }
+                    }
+                }
+
+                infos
+            } catch (e: Exception) {
+                Log.e(TAG, "Error reading storage partitions", e)
+                emptyList()
+            }
         }
     }
 }

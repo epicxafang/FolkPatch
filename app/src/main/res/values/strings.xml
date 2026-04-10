@@ -636,6 +636,7 @@ Please ensure the app is completely closed and reopened for the commands to exec
     <string name="settings_home_layout_sign">SignUI</string>
     <string name="settings_home_layout_circle">CircleUI</string>
     <string name="settings_home_layout_dashboard_pro">DashboardUI</string>
+    <string name="settings_home_layout_stats">StatsUI</string>
     <string name="unofficial_version_title">Unofficial Version</string>
     <string name="unofficial_version_message">You are using FolkPatch which is not an official app, please download the official app!</string>
     <string name="go_to_github">Go to Github</string>
@@ -815,6 +816,13 @@ Please ensure the app is completely closed and reopened for the commands to exec
     <string name="home_device_status_battery_temp">Battery Temp</string>
     <string name="home_device_status_cpu_load">CPU Load</string>
     <string name="home_device_status_battery_level">Battery Level</string>
+    <string name="home_device_status_battery_charging">Charging</string>
+    <string name="home_device_status_cpu_temp">CPU Temperature</string>
+    <string name="home_device_status_memory_trend">Memory Trend</string>
+    <string name="home_storage_partitions">Storage Partitions</string>
+    <string name="home_device_status_cpu_freq">CPU Frequency</string>
+    <string name="home_network_rx">Download</string>
+    <string name="home_network_tx">Upload</string>
     <string name="home_storage_title">Storage</string>
     <string name="home_storage_internal">Internal Storage</string>
     <string name="home_storage_ram">RAM</string>
@@ -983,4 +991,12 @@ Please ensure the app is completely closed and reopened for the commands to exec
     <string name="theme_install">Install</string>
     <string name="theme_install_failed">Install failed</string>
     <string name="theme_install_success">Install successful</string>
+
+    <string name="home_stats_more_options">More options</string>
+    <string name="home_stats_kp_label">KP</string>
+    <string name="home_stats_manager_label">Manager</string>
+    <string name="home_device_status_gpu_load">GPU</string>
+    <string name="home_stats_kernel_modules">Kernel Modules</string>
+    <string name="home_stats_apm_modules">APM Modules</string>
+    <string name="home_stats_superusers">Superusers</string>
 </resources>

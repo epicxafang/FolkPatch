@@ -1045,7 +1045,7 @@ private fun InstallProgressDialog(
  * 系统信息卡片
  */
 @Composable
-private fun SystemInfoCard(
+internal fun SystemInfoCard(
     kpState: APApplication.State,
     apState: APApplication.State,
     zygiskImplement: String,
@@ -1299,7 +1299,7 @@ private fun StorageProgressBar(
  * 了解更多卡片 V4
  */
 @Composable
-private fun LearnMoreCardV4() {
+internal fun LearnMoreCardV4() {
     val uriHandler = androidx.compose.ui.platform.LocalUriHandler.current
 
     Card(

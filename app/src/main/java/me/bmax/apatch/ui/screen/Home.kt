@@ -191,6 +191,7 @@ fun HomeScreen(navigator: DestinationsNavigator) {
             "sign" -> HomeScreenSign(innerPadding, navigator, kpState, apState)
             "circle" -> HomeScreenCircle(innerPadding, navigator, kpState, apState)
             "dashboard_ui" -> HomeScreenV4(innerPadding, navigator, kpState, apState)
+            "stats" -> HomeScreenStats(innerPadding, navigator, kpState, apState)
             else -> HomeScreenV1(innerPadding, navigator, kpState, apState)
         }
     }

@@ -930,4 +930,20 @@
     <string name="theme_download_finalizing">正在完成喵...</string>
     <string name="settings_predictive_back">预测性返回手势喵</string>
     <string name="settings_predictive_back_summary">启用 Android 14+ 的预测性返回手势动画喵</string>
+
+    <string name="home_device_status_battery_charging">充电中喵</string>
+    <string name="home_device_status_cpu_temp">CPU温度喵</string>
+    <string name="home_device_status_memory_trend">内存趋势喵</string>
+    <string name="home_storage_partitions">存储分区喵</string>
+    <string name="home_device_status_cpu_freq">CPU频率喵</string>
+    <string name="home_network_rx">下载喵</string>
+    <string name="home_network_tx">上传喵</string>
+    <string name="settings_home_layout_stats">StatsUI</string>
+    <string name="home_stats_more_options">更多选项喵</string>
+    <string name="home_stats_kp_label">KP</string>
+    <string name="home_stats_manager_label">管理器喵</string>
+    <string name="home_device_status_gpu_load">GPU负载喵</string>
+    <string name="home_stats_kernel_modules">内核模块喵</string>
+    <string name="home_stats_apm_modules">APM模块喵</string>
+    <string name="home_stats_superusers">超级用户喵</string>
 </resources>

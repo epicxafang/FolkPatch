@@ -942,4 +942,20 @@
     <string name="theme_download_finalizing">Завершение...</string>
     <string name="settings_predictive_back">Предиктивный жест назад</string>
     <string name="settings_predictive_back_summary">Включить анимацию предиктивного жеста назад (Android 14+)</string>
+
+    <string name="home_device_status_battery_charging">Зарядка</string>
+    <string name="home_device_status_cpu_temp">Температура ЦПУ</string>
+    <string name="home_device_status_memory_trend">Тренд памяти</string>
+    <string name="home_storage_partitions">Разделы хранилища</string>
+    <string name="home_device_status_cpu_freq">Частота ЦПУ</string>
+    <string name="home_network_rx">Загрузка</string>
+    <string name="home_network_tx">Отдача</string>
+    <string name="settings_home_layout_stats">StatsUI</string>
+    <string name="home_stats_more_options">Ещё</string>
+    <string name="home_stats_kp_label">KP</string>
+    <string name="home_stats_manager_label">Менеджер</string>
+    <string name="home_device_status_gpu_load">GPU</string>
+    <string name="home_stats_kernel_modules">Модули ядра</string>
+    <string name="home_stats_apm_modules">Модули APM</string>
+    <string name="home_stats_superusers">Суперпользователи</string>
 </resources>

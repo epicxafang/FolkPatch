@@ -931,4 +931,20 @@
     <string name="theme_download_finalizing">正在完成...</string>
     <string name="settings_predictive_back">預測性返回手勢</string>
     <string name="settings_predictive_back_summary">啟用 Android 14+ 的預測性返回手勢動畫</string>
+
+    <string name="home_device_status_battery_charging">充電中</string>
+    <string name="home_device_status_cpu_temp">CPU 溫度</string>
+    <string name="home_device_status_memory_trend">記憶體趨勢</string>
+    <string name="home_storage_partitions">儲存分區</string>
+    <string name="home_device_status_cpu_freq">CPU 頻率</string>
+    <string name="home_network_rx">下載</string>
+    <string name="home_network_tx">上傳</string>
+    <string name="settings_home_layout_stats">StatsUI</string>
+    <string name="home_stats_more_options">更多選項</string>
+    <string name="home_stats_kp_label">KP</string>
+    <string name="home_stats_manager_label">管理器</string>
+    <string name="home_device_status_gpu_load">GPU 負載</string>
+    <string name="home_stats_kernel_modules">內核模組</string>
+    <string name="home_stats_apm_modules">APM 模組</string>
+    <string name="home_stats_superusers">超級使用者</string>
 </resources>

@@ -937,4 +937,20 @@ Komutların çalışması için uygulamanın tamamen kapatılıp yeniden açıld
     <string name="theme_download_finalizing">Tamamlanıyor...</string>
     <string name="settings_predictive_back">Tahmin Edici Geri Hareketi</string>
     <string name="settings_predictive_back_summary">Android 14+ tahmin edici geri hareketi animasyonunu etkinleştir</string>
+
+    <string name="home_device_status_battery_charging">Şarj Oluyor</string>
+    <string name="home_device_status_cpu_temp">CPU Sıcaklığı</string>
+    <string name="home_device_status_memory_trend">Bellek Trendi</string>
+    <string name="home_storage_partitions">Depolama Bölümleri</string>
+    <string name="home_device_status_cpu_freq">CPU Frekansı</string>
+    <string name="home_network_rx">İndirme</string>
+    <string name="home_network_tx">Yükleme</string>
+    <string name="settings_home_layout_stats">StatsUI</string>
+    <string name="home_stats_more_options">Diğer seçenekler</string>
+    <string name="home_stats_kp_label">KP</string>
+    <string name="home_stats_manager_label">Yönetici</string>
+    <string name="home_device_status_gpu_load">GPU</string>
+    <string name="home_stats_kernel_modules">Çekirdek Modüller</string>
+    <string name="home_stats_apm_modules">APM Modülleri</string>
+    <string name="home_stats_superusers">Süper Kullanıcılar</string>
 </resources>

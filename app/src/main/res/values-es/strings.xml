@@ -945,4 +945,20 @@ Por ejemplo, los KPM que previenen la modificación de particiones solo pueden u
     <string name="theme_download_finalizing">Finalizando...</string>
     <string name="settings_predictive_back">Gesto atrás predictivo</string>
     <string name="settings_predictive_back_summary">Habilitar la animación del gesto atrás predictivo de Android 14+</string>
+
+    <string name="home_device_status_battery_charging">Cargando</string>
+    <string name="home_device_status_cpu_temp">Temp. CPU</string>
+    <string name="home_device_status_memory_trend">Tendencia de Memoria</string>
+    <string name="home_storage_partitions">Particiones de Almacenamiento</string>
+    <string name="home_device_status_cpu_freq">Frecuencia CPU</string>
+    <string name="home_network_rx">Descarga</string>
+    <string name="home_network_tx">Subida</string>
+    <string name="settings_home_layout_stats">StatsUI</string>
+    <string name="home_stats_more_options">Más opciones</string>
+    <string name="home_stats_kp_label">KP</string>
+    <string name="home_stats_manager_label">Gestor</string>
+    <string name="home_device_status_gpu_load">GPU</string>
+    <string name="home_stats_kernel_modules">Módulos del Kernel</string>
+    <string name="home_stats_apm_modules">Módulos APM</string>
+    <string name="home_stats_superusers">Superusuarios</string>
 </resources>
