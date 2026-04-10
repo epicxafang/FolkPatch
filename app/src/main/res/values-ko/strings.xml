@@ -28,6 +28,10 @@
     <string name="settings_show_apm">시스템 모듈 표시</string>
     <string name="settings_show_kpm">커널 모듈 표시</string>
     <string name="settings_show_superuser">Superuser 표시</string>
+    <string name="settings_floating_auto_hide">자동 숨기기</string>
+    <string name="settings_floating_auto_hide_summary">3초 동작 없이 플로팅 바 자동 숨기기</string>
+    <string name="settings_floating_swipe_hide">스와이프 숨기기</string>
+    <string name="settings_floating_swipe_hide_summary">아래로 스와이프 시 숨기기, 위로 스와이프 시 표시</string>
     <string name="settings_block_kernelpatch_update">KernelPatch 업데이트 알림 차단</string>
     <string name="settings_block_kernelpatch_update_summary">KernelPatch 업데이트 알림을 표시하지 않습니다.</string>
     <string name="settings_block_androidpatch_update">시스템 패치 업데이트 알림 차단</string>

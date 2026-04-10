@@ -31,6 +31,10 @@
     <string name="settings_show_apm">Показать APM</string>
     <string name="settings_show_kpm">Показать KPM</string>
     <string name="settings_show_superuser">Показать Суперпользователя</string>
+    <string name="settings_floating_auto_hide">Автоскрытие панели</string>
+    <string name="settings_floating_auto_hide_summary">Автоматически скрывать плавающую панель через 3 секунды</string>
+    <string name="settings_floating_swipe_hide">Скрытие при прокрутке</string>
+    <string name="settings_floating_swipe_hide_summary">Скрывать панель при прокрутке вниз, показывать при прокрутке вверх</string>
     <string name="settings_block_kernelpatch_update">Блокировать обновление KernelPatch</string>
     <string name="settings_block_kernelpatch_update_summary">Не показывать уведомления об обновлении KernelPatch</string>
     <string name="settings_block_androidpatch_update">Блокировать обновление системного патча</string>

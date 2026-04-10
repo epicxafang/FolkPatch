@@ -23,6 +23,10 @@
     <string name="settings_show_apm">Pokaż kartę APM</string>
     <string name="settings_show_kpm">Pokaż kartę KPM</string>
     <string name="settings_show_superuser">Pokaż kartę Superuser</string>
+    <string name="settings_floating_auto_hide">Automatyczne ukrywanie</string>
+    <string name="settings_floating_auto_hide_summary">Automatycznie ukrywaj pływający pasek po 3 sekundach bezczynności</string>
+    <string name="settings_floating_swipe_hide">Ukrywanie przy przewijaniu</string>
+    <string name="settings_floating_swipe_hide_summary">Ukrywaj pasek przy przewijaniu w dół, pokazuj przy przewijaniu w górę</string>
     <string name="settings_block_kernelpatch_update">Zablokuj aktualizację KernelPatch</string>
     <string name="settings_block_kernelpatch_update_summary">Nie pokazuj powiadomień o aktualizacji KernelPatch</string>
     <string name="settings_block_androidpatch_update">Zablokuj aktualizację łatki systemowej</string>

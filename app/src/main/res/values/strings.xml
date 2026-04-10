@@ -28,6 +28,10 @@
     <string name="settings_show_apm">Show APM</string>
     <string name="settings_show_kpm">Show KPM</string>
     <string name="settings_show_superuser">Show SuperUser</string>
+    <string name="settings_floating_auto_hide">Auto-hide Floating Bar</string>
+    <string name="settings_floating_auto_hide_summary">Automatically hide the floating bar after 3 seconds of inactivity</string>
+    <string name="settings_floating_swipe_hide">Swipe to Hide Floating Bar</string>
+    <string name="settings_floating_swipe_hide_summary">Hide the floating bar when scrolling down, show when scrolling up</string>
     <string name="settings_block_kernelpatch_update">Block KernelPatch Update</string>
     <string name="settings_block_kernelpatch_update_summary">Do not show KernelPatch update notifications</string>
     <string name="settings_block_androidpatch_update">Block System Patch Update</string>

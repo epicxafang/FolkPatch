@@ -588,11 +588,15 @@ class MainActivity : AppCompatActivity() {
 
                 // 读取导航栏模式设置
                 var navMode by remember { mutableStateOf(prefs.getString("nav_mode", "floating") ?: "floating") }
+                var floatingAutoHide by remember { mutableStateOf(prefs.getBoolean("floating_auto_hide", true)) }
+                var floatingSwipeHide by remember { mutableStateOf(prefs.getBoolean("floating_swipe_hide", true)) }
                 
                 DisposableEffect(Unit) {
                     val navModeListener = SharedPreferences.OnSharedPreferenceChangeListener { sharedPrefs, key ->
-                        if (key == "nav_mode") {
-                            navMode = sharedPrefs.getString("nav_mode", "floating") ?: "floating"
+                        when (key) {
+                            "nav_mode" -> navMode = sharedPrefs.getString("nav_mode", "floating") ?: "floating"
+                            "floating_auto_hide" -> floatingAutoHide = sharedPrefs.getBoolean("floating_auto_hide", true)
+                            "floating_swipe_hide" -> floatingSwipeHide = sharedPrefs.getBoolean("floating_swipe_hide", true)
                         }
                     }
                     prefs.registerOnSharedPreferenceChangeListener(navModeListener)
@@ -612,7 +616,6 @@ class MainActivity : AppCompatActivity() {
 
                 fun resetBottomBarAutoHide() {
                     isBottomBarVisible = true
-                    // Changing the key restarts the LaunchedEffect timer
                     autoHideKey++
                 }
 
@@ -626,15 +629,18 @@ class MainActivity : AppCompatActivity() {
                 // plus 3s auto-hide after last interaction.
                 val isFloatingMode = navMode == "floating"
 
-                LaunchedEffect(isFloatingMode, autoHideKey) {
-                    if (isFloatingMode && isBottomBarVisible) {
+                LaunchedEffect(isFloatingMode, autoHideKey, floatingAutoHide) {
+                    if (isFloatingMode && floatingAutoHide && isBottomBarVisible) {
                         delay(3000L)
                         isBottomBarVisible = false
                     }
                 }
 
                 val showBottomBar = if (isFloatingMode) {
-                    isBottomBarVisible && !isScrollingDown.value
+                    if (!floatingAutoHide && !floatingSwipeHide) true
+                    else if (!floatingAutoHide) !isScrollingDown.value
+                    else if (!floatingSwipeHide) isBottomBarVisible
+                    else isBottomBarVisible && !isScrollingDown.value
                 } else {
                     true
                 }

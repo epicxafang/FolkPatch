@@ -279,6 +279,16 @@ fun AppearanceSettings(
     var showNavSchemeDialog by remember { mutableStateOf(false) }
     val showNavScheme = matchLayout || shouldShow(searchText, navSchemeTitle, navSchemeLabel)
 
+    // Floating Nav Bar Settings (only visible in floating mode)
+    val isFloatingNav = currentNavMode == "floating"
+    val floatingAutoHideTitle = stringResource(id = R.string.settings_floating_auto_hide)
+    val floatingAutoHideSummary = stringResource(id = R.string.settings_floating_auto_hide_summary)
+    val floatingSwipeHideTitle = stringResource(id = R.string.settings_floating_swipe_hide)
+    val floatingSwipeHideSummary = stringResource(id = R.string.settings_floating_swipe_hide_summary)
+    var floatingAutoHide by remember { mutableStateOf(prefs.getBoolean("floating_auto_hide", true)) }
+    var floatingSwipeHide by remember { mutableStateOf(prefs.getBoolean("floating_swipe_hide", true)) }
+    val showFloatingSettings = isFloatingNav && (matchLayout || shouldShow(searchText, floatingAutoHideTitle, floatingAutoHideSummary, floatingSwipeHideTitle, floatingSwipeHideSummary))
+
     // Grid Layout Background (KernelSU style only)
     val isKernelSuStyle = currentStyle == "kernelsu"
     val gridBackgroundTitle = stringResource(id = R.string.settings_grid_working_card_background)
@@ -704,6 +714,30 @@ fun AppearanceSettings(
                         )
                     },
                     leadingContent = { Icon(Icons.Filled.SwapHoriz, null) }
+                )
+            }
+            
+            // Floating Nav Bar Settings
+            if (showFloatingSettings) {
+                SwitchItem(
+                    icon = Icons.Filled.VisibilityOff,
+                    title = floatingAutoHideTitle,
+                    summary = floatingAutoHideSummary,
+                    checked = floatingAutoHide,
+                    onCheckedChange = {
+                        floatingAutoHide = it
+                        prefs.edit().putBoolean("floating_auto_hide", it).apply()
+                    }
+                )
+                SwitchItem(
+                    icon = Icons.Filled.TouchApp,
+                    title = floatingSwipeHideTitle,
+                    summary = floatingSwipeHideSummary,
+                    checked = floatingSwipeHide,
+                    onCheckedChange = {
+                        floatingSwipeHide = it
+                        prefs.edit().putBoolean("floating_swipe_hide", it).apply()
+                    }
                 )
             }
             

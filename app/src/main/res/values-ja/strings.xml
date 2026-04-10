@@ -21,6 +21,10 @@
     <string name="settings_show_apm">APM を表示</string>
     <string name="settings_show_kpm">KPM を表示</string>
     <string name="settings_show_superuser">スーパーユーザーを表示</string>
+    <string name="settings_floating_auto_hide">自動非表示</string>
+    <string name="settings_floating_auto_hide_summary">3秒間操作がないとフローティングバーを自動的に非表示</string>
+    <string name="settings_floating_swipe_hide">スワイプで非表示</string>
+    <string name="settings_floating_swipe_hide_summary">下にスワイプで非表示、上にスワイプで表示</string>
     <string name="settings_block_kernelpatch_update">KernelPatch の更新をブロック</string>
     <string name="settings_block_kernelpatch_update_summary">KernelPatch の更新通知を表示しないようにします。</string>
     <string name="settings_block_androidpatch_update">システムパッチの更新をブロック</string>

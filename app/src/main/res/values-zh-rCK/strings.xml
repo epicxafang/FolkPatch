@@ -28,6 +28,10 @@
     <string name="settings_show_apm">摆出来招牌菜</string>
     <string name="settings_show_kpm">摆出来特酱料</string>
     <string name="settings_show_superuser">摆出来首席大厨</string>
+    <string name="settings_floating_auto_hide">底栏自动收起来</string>
+    <string name="settings_floating_auto_hide_summary">3秒没操作就把底栏藏起来</string>
+    <string name="settings_floating_swipe_hide">滑动收起底栏</string>
+    <string name="settings_floating_swipe_hide_summary">往下滑的时候藏底栏，往上滑的时候亮出来</string>
     <string name="settings_block_kernelpatch_update">别嚷嚷秘酱料更新</string>
     <string name="settings_block_kernelpatch_update_summary">专心做菜，别老提示秘酱料换口味</string>
     <string name="settings_block_androidpatch_update">别嚷嚷招牌菜更新</string>
