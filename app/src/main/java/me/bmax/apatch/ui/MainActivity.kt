@@ -625,6 +625,26 @@ class MainActivity : AppCompatActivity() {
                 val currentBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentRoute = currentBackStackEntry?.destination?.route
 
+
+                var previousNavMode by rememberSaveable { mutableStateOf(navMode) }
+                val modeSwitchNavigator = navController.rememberDestinationsNavigator()
+                LaunchedEffect(navMode) {
+                    if (previousNavMode != navMode) {
+                        previousNavMode = navMode
+                        val destRoute = currentRoute
+                        if (destRoute != null) {
+                            val dest = BottomBarDestination.entries.find { it.direction.route == destRoute }
+                            if (dest != null) {
+                                modeSwitchNavigator.navigate(dest.direction) {
+                                    popUpTo(NavGraphs.root) { saveState = true }
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
+                            }
+                        }
+                    }
+                }
+
                 // Show bottom bar logic: hide when scrolling down in floating mode,
                 // plus 3s auto-hide after last interaction.
                 val isFloatingMode = navMode == "floating"
@@ -636,8 +656,12 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
+                // Auto-hide floating bar on secondary/detail pages (non-main-tab routes)
+                val isOnMainTabPage = currentRoute in bottomBarRoutes
+
                 val showBottomBar = if (isFloatingMode) {
-                    if (!floatingAutoHide && !floatingSwipeHide) true
+                    if (!isOnMainTabPage) false
+                    else if (!floatingAutoHide && !floatingSwipeHide) true
                     else if (!floatingAutoHide) !isScrollingDown.value
                     else if (!floatingSwipeHide) isBottomBarVisible
                     else isBottomBarVisible && !isScrollingDown.value
@@ -675,73 +699,65 @@ class MainActivity : AppCompatActivity() {
                             }
                         }
                     } else {
-                        // 竖向布局：NavigationBar 在底部
-                        if (isFloatingMode) {
-                            // Floating mode: use overlay approach with AnimatedVisibility
-                            Box(modifier = Modifier.fillMaxSize()) {
-                                val bottomBarVisibleState = remember { mutableStateOf(showBottomBar) }
-                                bottomBarVisibleState.value = showBottomBar
 
-                                CompositionLocalProvider(
-                                    LocalSnackbarHost provides snackBarHostState,
-                                    LocalScrollState provides ScrollState(
-                                        isScrollingDown = isScrollingDown,
-                                        scrollOffset = scrollOffset,
-                                        previousScrollOffset = previousScrollOffset
-                                    ),
-                                    LocalBottomBarVisible provides bottomBarVisibleState,
-                                    LocalIsFloatingNavMode provides true
-                                ) {
-                                    DestinationsNavHost(
-                                        modifier = Modifier
-                                             .fillMaxSize()
-                                             .nestedScroll(
-                                                 rememberScrollConnection(
-                                                     isScrollingDown,
-                                                     scrollOffset,
-                                                     previousScrollOffset,
-                                                     onUserScroll = { resetBottomBarAutoHide() }
-                                                 )
-                                             ),
-                                        navGraph = NavGraphs.root,
-                                        navController = navController,
-                                        engine = rememberNavHostEngine(navHostContentAlignment = Alignment.TopCenter),
-                                        defaultTransitions = createNavTransitions(folkXEngineEnabled, folkXAnimationType, folkXAnimationSpeed, bottomBarRoutes, useNavigationRail = false)
-                                    )
-                                }
+                        Box(modifier = Modifier.fillMaxSize()) {
+                            val bottomBarVisibleState = remember { mutableStateOf(showBottomBar) }
+                            bottomBarVisibleState.value = showBottomBar
 
-                                // Floating Bottom Bar as overlay
-                                 AnimatedVisibility(
-                                     visible = showBottomBar,
-                                     modifier = Modifier.align(Alignment.BottomCenter),
-                                     enter = slideInVertically(initialOffsetY = { it }) + fadeIn(),
-                                     exit = slideOutVertically(targetOffsetY = { it }) + fadeOut()
-                                 ) {
-                                     BottomBar(
-                                         navController = navController,
-                                         isFloating = true,
-                                         lastValidSelection = lastValidNavbarSelection,
-                                         onUserInteraction = { resetBottomBarAutoHide() }
-                                     )
-                                 }
+                            CompositionLocalProvider(
+                                LocalSnackbarHost provides snackBarHostState,
+                                LocalScrollState provides if (isFloatingMode) ScrollState(
+                                    isScrollingDown = isScrollingDown,
+                                    scrollOffset = scrollOffset,
+                                    previousScrollOffset = previousScrollOffset
+                                ) else null,
+                                LocalBottomBarVisible provides bottomBarVisibleState,
+                                LocalIsFloatingNavMode provides isFloatingMode
+                            ) {
+                                DestinationsNavHost(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .then(
+                                            if (isFloatingMode) Modifier.nestedScroll(
+                                                rememberScrollConnection(
+                                                    isScrollingDown,
+                                                    scrollOffset,
+                                                    previousScrollOffset,
+                                                    onUserScroll = { resetBottomBarAutoHide() }
+                                                )
+                                            ) else Modifier.padding(bottom = 80.dp)
+                                        ),
+                                    navGraph = NavGraphs.root,
+                                    navController = navController,
+                                    engine = rememberNavHostEngine(navHostContentAlignment = Alignment.TopCenter),
+                                    defaultTransitions = createNavTransitions(folkXEngineEnabled, folkXAnimationType, folkXAnimationSpeed, bottomBarRoutes, useNavigationRail = false)
+                                )
                             }
-                        } else {
-                            // Non-floating mode: use traditional Scaffold
-                            Scaffold(
-                                bottomBar = { BottomBar(navController, isFloating = false, lastValidSelection = lastValidNavbarSelection) }
-                            ) { _ ->
-                                CompositionLocalProvider(
-                                    LocalSnackbarHost provides snackBarHostState,
-                                    LocalIsFloatingNavMode provides false,
+
+                            // 底部导航栏：根据模式渲染悬浮或传统样式
+                            if (isFloatingMode) {
+                                // Floating mode: animated overlay
+                                AnimatedVisibility(
+                                    visible = showBottomBar,
+                                    modifier = Modifier.align(Alignment.BottomCenter),
+                                    enter = slideInVertically(initialOffsetY = { it }) + fadeIn(),
+                                    exit = slideOutVertically(targetOffsetY = { it }) + fadeOut()
                                 ) {
-                                    DestinationsNavHost(
-                                        modifier = Modifier.padding(bottom = 80.dp),
-                                        navGraph = NavGraphs.root,
+                                    BottomBar(
                                         navController = navController,
-                                        engine = rememberNavHostEngine(navHostContentAlignment = Alignment.TopCenter),
-                                        defaultTransitions = createNavTransitions(folkXEngineEnabled, folkXAnimationType, folkXAnimationSpeed, bottomBarRoutes, useNavigationRail = false)
+                                        isFloating = true,
+                                        lastValidSelection = lastValidNavbarSelection,
+                                        onUserInteraction = { resetBottomBarAutoHide() }
                                     )
                                 }
+                            } else {
+                                // Non-floating mode: standard NavigationBar at bottom
+                                BottomBar(
+                                    modifier = Modifier.align(Alignment.BottomCenter),
+                                    navController = navController,
+                                    isFloating = false,
+                                    lastValidSelection = lastValidNavbarSelection
+                                )
                             }
                         }
                     }
@@ -767,6 +783,7 @@ class MainActivity : AppCompatActivity() {
 
 @Composable
 private fun BottomBar(
+    modifier: Modifier = Modifier,
     navController: NavHostController,
     isFloating: Boolean = false,
     lastValidSelection: MutableState<Int> = mutableStateOf(0),
@@ -809,6 +826,7 @@ private fun BottomBar(
     }
 
     Crossfade(
+        modifier = modifier,
         targetState = state,
         label = "BottomBarStateCrossfade"
     ) { state ->
